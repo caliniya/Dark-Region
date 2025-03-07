@@ -1,0 +1,22 @@
+{
+    "type":"PowerNode",
+    "name":"供电塔",
+    "description": "接入电力，并存储微量电力",
+    "details": "将输电塔的电力接入",
+    "size":1,//大小
+    "health":120,
+    "maxNodes":50,//最大连接数
+    "laserRange":10,//范围
+	"research": {"parent":"高温核心"//科技前置
+					"objectives": [{
+				"type": "OnSector",//进入地图
+				"preset": "行星着陆端口"
+			},]
+	}
+    "requirements":[
+        {"item":"铱","amount":5},
+        {"item":"银","amount":15},//建造需求
+        ],
+        "category":"power"
+           "consumes": {"powerBuffered":10,}//储存电力
+}

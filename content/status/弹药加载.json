@@ -1,0 +1,5 @@
+{
+"name":"弹药加载"
+"description":"提高射速"
+"reloadMultiplier":1.4/*攻速提升*/
+}

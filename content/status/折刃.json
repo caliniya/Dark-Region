@@ -1,0 +1,5 @@
+{
+"name":"折刃"
+"description":"降低伤害
+"damageMultiplier":0.7,/*伤害倍率*/
+}

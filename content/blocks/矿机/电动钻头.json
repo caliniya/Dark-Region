@@ -1,0 +1,32 @@
+{
+	"name": "电动钻头",
+	"description": "消耗电力开采矿物",
+	"details":"用电力带动电动机，使机械头钻取矿物",
+	"type": "Drill",
+	"size": 2,
+	"tier": 3,//等级
+	"health": 200,
+	"alwaysUnlocked":true,//科技树默认解锁
+	"drillTime": 60,//挖掘时间
+	"rotateSpeed":20,//旋转速度
+	"warmupSpeed":2,//准备时间
+	"itemCapacity": 10,//物品容量
+	"liquidCapacity": 10,  //液体容量
+	"idleSound":"DrillBit",
+	"idleSoundVolume": 0.1,
+	"canOverdrive": true,
+	"drawRim":false,
+	"hasItems": true,
+	"updateEffect": "mineSmall",
+	"liquidBoostIntensity": 1.55,
+	"consumes": {//耗电
+	"power":0.5, },
+	"requirements": [
+		{ "item": "铱", "amount": 20 }
+	],
+	"category": "production",
+	    "research":{"parent" :"高温核心",
+               "planet" :"深暗之地-加利尼亚",
+               }
+	
+}

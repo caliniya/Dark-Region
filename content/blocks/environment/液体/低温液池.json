@@ -1,0 +1,14 @@
+{
+	"mapColor": "D75B6E",
+	"speedMultiplier": 0.5,
+	"variants": 0,
+	
+	"statusDuration": 180
+	"albedo": 1,
+	//"cacheLayer": "water",
+	//"shallow": true,
+	"isLiquid": true,
+	"liquidDrop": "低温液",
+	"liquidMultiplier": 1,
+	"supportsOverlay": true
+}

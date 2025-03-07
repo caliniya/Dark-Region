@@ -1,0 +1,23 @@
+{
+    "name": "高温核心",  // 名称
+    "description": "可输出电力的第1代核心\n可自主维持温度且具有装甲",  // 描述
+    "details": "虽然不清楚为什么能保持高温，但总之能够运行了",  // 灰字描述
+    "unitType": "熔融",  // 核心单元类型
+    "unitCapModifier": 10,  // 单元容量修正值
+    "alwaysUnlocked": true,  // 科技树默认解锁
+    "armor": 4,  // 护甲
+    "health": 4000,  // 生命值
+    "size": 4,  // 尺寸
+    "itemCapacity": 2000,  // 物品容量
+    "requirements": [  // 建造资源需求
+        {"item": "铱", "amount": 2000},  
+        {"item": "银", "amount": 4000},  
+    ],
+    "buildSpeed": 0.3,  // 建造速度
+    "researchCostMultiplier": 0.1,  // 研究成本倍增器
+    "category": "effect",  // 类别
+    "research": {
+        "root": true,  // 使其作为科技树的最中心
+        "planet": "加利尼亚"  // 所属星球的科技树
+    }
+}

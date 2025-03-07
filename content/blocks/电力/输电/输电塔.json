@@ -1,0 +1,22 @@
+{
+    "type":"PowerNode",
+    "name":"输电塔",
+    "description": "传输电力，并存储微量电力",
+    "details": "传输电力",
+    "size":1,//大小
+    "health":120,
+    "maxNodes":4,//最大连接数
+    "laserRange":30,//范围
+	"research": {"parent":"供电塔"//科技前置
+					"objectives": [{
+				"type": "OnSector",//进入地图
+				"preset": "行星着陆端口"
+			},]
+	}
+    "requirements":[
+        {"item":"铱","amount":5},
+        {"item":"银","amount":10},//建造需求
+        ],
+        "category":"power"
+           "consumes": {"powerBuffered":10,}//储存电力
+}

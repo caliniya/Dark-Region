@@ -1,0 +1,5 @@
+{
+"name":"锋利",
+"description":"提高伤害"
+"damageMultiplier":1.5,/*伤害倍率*/
+}

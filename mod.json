@@ -1,0 +1,10 @@
+{
+"name":"深暗之地",//模组名字
+"displayName":"深暗之地",//模组名字
+"author":"caliniya/代码\n依依/贴图\nE/音乐(在做)",//模组作者
+"description":"无",//模组介绍
+"version":"0.1.4",//模组版本
+"minGameVersion":"136",//模组适配游戏版本
+"hidden": true,
+"main": "MultiCrafterAdapter",
+}

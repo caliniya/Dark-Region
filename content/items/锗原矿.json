@@ -1,0 +1,23 @@
+{
+  "name":"锗原矿",
+  //名字
+  "description":"含有锗的原矿",
+  //介绍
+  //"details":"",
+  "color":"869CBEFF",
+  "explosiveness":0,
+  //爆炸性
+  "flammability":0,
+  //易燃性
+  "radioactivity":0,
+  //放射性
+  "hardness":1,
+  //开采硬度
+  "cost":0.5,
+  //当建筑材料中每增加一个此物品时所增加的建造时间
+  "alwaysUnlocked":false,
+  "research": {
+    "parent" :"铱",
+    "planet" :"加利尼亚",
+  }
+}

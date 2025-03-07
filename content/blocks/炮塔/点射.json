@@ -1,0 +1,78 @@
+{
+  "type": "ContinuousTurret",
+  "name": "点射",
+  "description": "向敌人发射治疗激光",
+  "health": 1000,
+  "size": 2,
+  "category": "turret",
+  // 是炮塔
+  "canOverdrive": false,
+  // 可以超速？
+  "range": 200,
+  // 射程
+  "rotateSpeed": 3,
+  // 旋转速度
+  "aimChangeSpeed": 3,
+  // 瞄准变化速度
+  "targetInterval": 0,
+  // 目标间隔
+  "shootCone": 360,
+  // 射击角度
+  "shootSound": "none",
+  // 射击音效
+  "loopSound": "laserbeam",
+  // 循环音效
+  "loopSoundVolume": 1,
+  // 循环音效音量
+  "targetAir": true,
+  // 是否能攻击空中单位
+  "targetGround": true,
+  // 是否能攻击地面单位
+  "targetHealing": true,
+  // 是否能治疗单位
+  "consumes": {
+    // 能源消耗
+    "power": 0.8
+  },
+  "requirements": [// 制造需求
+    {
+      "item": "铱",
+      "amount": 85
+    },
+    {
+      "item": "银",
+      "amount": 75
+    }],
+  "shootType": {
+    // 射击类型
+    "type": "pointLaserBulletType",
+    //点激光
+    "damage": 5,
+    // 伤害
+    "color": "84F491FF",
+    // 射击颜色
+    "healPercent": 500,
+    // 治疗百分比
+    "splashDamage": 5,
+    // 溅射伤害
+    "splashDamageRadius": 32,
+    // 溅射范围半径
+    "damageInterval": 30,
+    // 伤害间隔
+    "ammoMultiplier": 1,
+    // 弹药倍数
+    "collidesGround": true,
+    // 是否与地面碰撞
+    "collidesAir": true,
+    // 是否与空中单位碰撞
+    "collidesTeam": true,
+    // 是否与队伍碰撞
+    "targetUnits": true,
+    // 是否能攻击单位
+    "targetBuildings": true,
+    // 是否能攻击建筑
+    "hitColor": "84F491FF",
+    // 命中颜色
+    "buildingDamageMultiplier": 0.5 // 对建筑伤害倍数
+  }
+}

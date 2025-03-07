@@ -1,0 +1,74 @@
+{
+  "type": "PowerTurret",
+  // 类型: 消耗物品的炮塔
+  "name": "爆裂",
+  // 名字
+  "description": "释放冲击波",
+  // 介绍
+  "size": 4,
+  // 物品面积
+  "health": 5000,
+  // 建筑血量
+  "ammoPerShot": 1,
+  // 每次攻击消耗弹药数量
+  "range": 300,
+  // 索敌距离
+  "reload": 60,
+  // 攻击速度（每多少帧射击一次）(一秒60帧)
+  "category": "turret",
+  // 类型
+  "recoil": 0,
+  // 后坐力
+  "inaccuracy": 1,
+  // 误差（度）
+  "consumes": {
+    "power": 0.8
+    "coolant": {
+      "amount": 0.1,
+      "optional": true,
+    }
+  },
+  "ammoUseEffect": {},
+  // 开火特效
+  "rotateSpeed": 1.6,
+  // 旋转速度
+  "targetAir": true,
+  // 索敌天空
+  "targetGround": true,
+  // 索敌地面
+  "coolantMultiplier": 7,
+  // 液体加速倍率
+  "heatColor": "#FF0000",
+  "shootType": {
+    "speed": 0,
+    // 子弹速度（输入数字×8）
+    "splashDamage": 50,
+    // 溅射伤害
+    "splashDamageRadius": 320,
+    // 溅射范围半径
+    "damage": 0,
+    // 伤害
+    "knockback": 10,
+    // 击退
+    "lifetime": 1,
+    // 弹药存在时间（帧）
+    "width": 1,
+    // 子弹宽度
+    "height": 1,
+    // 子弹长度
+    "pierce": true,
+    "pierceArmor": true,
+    // 穿甲
+    "bulletInterval": 3,
+  },
+  "requirements": [{
+    "item": "铱",
+    "amount": 50
+  }],
+  "category": "turret",
+  // 类型
+  "research": {
+    "parent": "单管",
+    "planet": "深暗之地-加利尼亚"
+  }
+}

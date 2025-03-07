@@ -1,0 +1,12 @@
+{
+"name":"银矿脉",
+"type":"OreBlock",
+"playerUnmineable":true,//玩家核心机能不能挖
+"itemDrop":"银",
+"mapColor":"C0C0C0FF",//矿脉在小地图上显示的颜色
+"useColor":true,
+"oreDefault":true,//是否自然生成
+"oreThreshold":1,//生成几率1=100%
+"oreScale":20,//矿脉的规模(块数)
+"variants":2,
+}

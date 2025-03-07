@@ -1,0 +1,48 @@
+{
+  "name": "电弧重熔室",
+  "type": "multicraft.MultiCrafter",
+  //多合成！
+  "itemCapacity": 50,
+  /*物品容量，数字都能改别的*/
+  "description": "利用电弧在高温下还原矿物",
+  "health": 1000,
+  "powerCapacity":200
+  "size": 3,
+  /*最高16，不然会崩*/
+  "hasPower": true,
+  /*是否需要电*/
+  "hasLiquids": true,
+  /*是否需要液体*/
+  "hasItems": true,
+  /*是否需要物品*/
+  "liquidCapacity": 600,
+  /*液体容量*/
+  "updateEffect": "none",
+
+  "recipes": [{
+    "input": "深暗之地-锗原矿/2",
+    "output": "深暗之地-锗/1",
+    "power": 4,
+    "craftTime": 60,
+  },
+  {
+    "input": "深暗之地-锗原矿/6",
+    "output": "深暗之地-锗/3",
+    "power": 8,
+    "craftTime": 120,
+  }
+  ],
+    
+
+  "requirements": [{
+    "item": "铱",
+    "amount": 15
+  } /*建造所用物品*/
+  ],
+  "category": "crafting",
+  //是工厂
+  "research": {
+    "parent": "高温核心",
+    "planet": "深暗之地-加利尼亚"
+  }
+}

@@ -1,0 +1,16 @@
+{
+	"type": "OverflowGate",//类型,溢流门
+	"size":1,//平方大小
+	"invert":false,//反向
+	"category": "distribution",//菜单栏
+	"name": "管道溢流器",//名字
+	"description": "当前方已经填满则向侧面运输物品",//介绍
+	"details":"最多只能放两个"
+	"research": "管道"//前置科技树
+	"alwaysUnlocked":false,//科技树默认解锁
+	"health":100//血量
+	//"regionRotated":1,//区域旋转
+	"requirements": [//建造消耗
+		{ "item":"铱","amount":2},
+	]
+}

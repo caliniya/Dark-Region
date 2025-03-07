@@ -1,0 +1,15 @@
+{
+    "type": "battery",
+    "category": "power",
+    "name": "蓄电池",
+    "description":"储存电量，在电网供电不足时放电",
+    "research":"输电塔",//科技树前置
+    "size": 1,
+    "health": 500,
+    "hapower" : true
+    "requirements": [
+        {"item": "铱", "amount":20},
+        {"item": "银", "amount": 20}],
+        "consumes": {"powerBuffered":100000,//储存电力
+	                 },
+}
