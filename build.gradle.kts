@@ -49,12 +49,12 @@ val sdkHome: String = System.getenv("ANDROID_HOME")
 
 java {
     sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_1_8
 }
 
 tasks.withType<Jar> {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-    archiveFileName.set("${project.name}-${project.version}-Desktop.jar")
+    archiveFileName.set("${project.name}-v${project.version}-Desktop.jar")
 
     from(configurations.runtimeClasspath.get().toList()
         .map { if (it.isDirectory) it else zipTree(it) })
@@ -90,8 +90,8 @@ tasks.register("jarAndroid") {
                 add("--min-api")
                 add("14")
                 add("--output")
-                add("${project.name}-${project.version}-Android.jar")
-                add("${project.name}-${project.version}-Desktop.jar")
+                add("${project.name}-v${project.version}-Android.jar")
+                add("${project.name}-v${project.version}-Desktop.jar")
             })
             workingDir = File("${buildDir}/libs/")
         }
@@ -101,15 +101,15 @@ tasks.register("jarAndroid") {
 tasks.register("deploy", Jar::class) {
     dependsOn(tasks.getByName("jarAndroid"), "jar")
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-    archiveFileName.set("${project.name}-${project.version}.jar")
+    archiveFileName.set("${project.name}-v${project.version}.jar")
 
     from(
-        zipTree("${buildDir}/libs/${project.name}-${project.version}-Desktop.jar"),
-        zipTree("${buildDir}/libs/${project.name}-${project.version}-Android.jar")
+        zipTree("${buildDir}/libs/${project.name}-v${project.version}-Desktop.jar"),
+        zipTree("${buildDir}/libs/${project.name}-v${project.version}-Android.jar")
     )
 
     doLast {
-        delete("${buildDir}/libs/${project.name}-${project.version}-Desktop.jar")
-        delete("${buildDir}/libs/${project.name}-${project.version}-Android.jar")
+        delete("${buildDir}/libs/${project.name}-v${project.version}-Desktop.jar")
+        delete("${buildDir}/libs/${project.name}-v${project.version}-Android.jar")
     }
 }

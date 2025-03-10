@@ -1,0 +1,32 @@
+name: gradle deploy
+run-name: 构建与打包 Mod
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+permissions:
+  contents: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出仓库内容
+        uses: actions/checkout@v4
+      - name: 设置 JDK 版本
+        uses: actions/setup-java@v4
+        with:
+           java-version: 17
+           distribution: zulu
+      - name: 设置 Android SDK 版本
+        uses: android-actions/setup-android@v3
+        with:
+          log-accepted-android-sdk-licenses: false
+      - name: 开始构建与打包
+        run: ./gradlew deploy --stacktrace --warning-mode all
+      - name: 上传 Release
+        uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: build/libs/Dark-Region-v*.*.*.jar
