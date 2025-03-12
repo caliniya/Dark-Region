@@ -1,5 +1,5 @@
 plugins {
-    kotlin("jvm") version "2.0.0"
+    java
 }
 
 repositories {
@@ -13,24 +13,11 @@ val mindustryVersion = "v146"
 val jabelVersion = "93fde537c7"
 
 dependencies {
-    api(kotlin("stdlib", "2.0.0"))
     compileOnly("com.github.Anuken.Arc:arc-core:${mindustryVersion}")
     compileOnly("com.github.Anuken.Mindustry:core:${mindustryVersion}")
     implementation("com.github.liplum:MultiCrafterLib:v1.8")
-    annotationProcessor("com.github.Anuken:jabel:$jabelVersion")
-}
-
-buildscript {
-    repositories {
-        mavenLocal()
-        mavenCentral()
-    }
-
-    val kotlinVersion = "2.0.0"
-
-    dependencies {
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}")
-    }
+    //这个有点问题，但暂时用不到它，就不修了
+    //annotationProcessor("com.github.Anuken:jabel:$jabelVersion")
 }
 
 group = "meow0x7e"
@@ -50,6 +37,14 @@ val sdkHome: String = System.getenv("ANDROID_HOME")
 java {
     sourceCompatibility = JavaVersion.VERSION_17
     targetCompatibility = JavaVersion.VERSION_17
+}
+
+allprojects {
+    tasks.withType(JavaCompile::class.java).apply {
+        configureEach {
+            options.compilerArgs.addAll(listOf("--release", "8"))
+        }
+    }
 }
 
 tasks.withType<Jar> {

@@ -155,6 +155,9 @@ gradle-app.setting
 Thumbs.db
 android/libs/
 
+## AIDE
+.androidide
+
 ## Other
 .kotlin/
 kls_database.db
