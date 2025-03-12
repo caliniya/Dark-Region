@@ -1,0 +1,35 @@
+{
+  "allFiles": [
+    {
+      "file": "/storage/emulated/0/AndroidIDEProjects/Dark-Region/src/main/java/DarkRegion/DarkRegion.java",
+      "selection": {
+        "end": {
+          "column": 1,
+          "index": 156,
+          "line": 9
+        },
+        "start": {
+          "column": 1,
+          "index": 156,
+          "line": 9
+        }
+      }
+    },
+    {
+      "file": "/storage/emulated/0/AndroidIDEProjects/Dark-Region/src/main/kotlin/meow0x7e/DarkRegion.kt",
+      "selection": {
+        "end": {
+          "column": 0,
+          "index": 0,
+          "line": 0
+        },
+        "start": {
+          "column": 0,
+          "index": 0,
+          "line": 0
+        }
+      }
+    }
+  ],
+  "selectedFile": "/storage/emulated/0/AndroidIDEProjects/Dark-Region/src/main/kotlin/meow0x7e/DarkRegion.kt"
+}

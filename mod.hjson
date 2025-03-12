@@ -15,5 +15,5 @@
     // 在 Mod 浏览器中隐藏
     "hidden": true,
     // Mod 入口类
-    "main": "meow0x7e.DarkRegion"
+    "main": "DarkRegion.DarkRegion"
 }
