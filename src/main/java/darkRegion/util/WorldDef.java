@@ -1,4 +1,4 @@
-package Dark_Region.util;
+package darkRegion.util;
 
 import arc.math.geom.Vec2;
 import arc.struct.Seq;

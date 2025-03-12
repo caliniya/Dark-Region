@@ -1,4 +1,4 @@
-package Dark_Region.world.blocks.environment;
+package darkRegion.world.blocks.environment;
 
 import arc.graphics.g2d.Draw;
 import arc.graphics.g2d.TextureRegion;
@@ -19,7 +19,11 @@ public class ConnectFloor extends Floor {
     public Seq<Floor> connects;
 
     public ConnectFloor(String name) {
-        super(name);
+        this(name, 0);
+    }
+
+    public ConnectFloor(String name, int variants) {
+        super(name, variants);
     }
 
     @Override

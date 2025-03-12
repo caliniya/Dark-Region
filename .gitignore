@@ -161,3 +161,6 @@ android/libs/
 ## Other
 .kotlin/
 kls_database.db
+
+## 允许项目级词典上传到 git 仓库
+!.idea/dictionaries/default_user.xml

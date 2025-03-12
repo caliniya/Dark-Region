@@ -1,7 +1,6 @@
-package Dark_Region.space;
+package darkRegion.space;
 
 import arc.math.geom.Vec2;
-import mindustry.content.Blocks;
 import mindustry.game.Team;
 import mindustry.graphics.g3d.PlanetParams;
 import mindustry.maps.generators.BlankPlanetGenerator;
@@ -12,21 +11,20 @@ import mindustry.world.blocks.environment.Floor;
 import static mindustry.Vars.state;
 import static mindustry.Vars.world;
 
-import Dark_Region.content.DRloadouts;
-import Dark_Region.content.DRblocks;
-import Dark_Region.util.WorldDef;
+import darkRegion.content.Loadouts;
+import darkRegion.content.Blocks;
+import darkRegion.util.WorldDef;
 
-public class STAGenerator extends BlankPlanetGenerator {
-    public Block core = DRblocks.hightemperaturecore;
+public class SpaceStationGenerator extends BlankPlanetGenerator {
+    public Block core = Blocks.highTemperatureCore;
     
     @Override
     public void generate() {
-
-        defaultLoadout = DRloadouts.basicSpacestations;
+        defaultLoadout = Loadouts.basicSpaceStations;
         int sx = width / 2, sy = height / 2;
 
-        Floor background = Blocks.empty.asFloor();
-        Floor ground = DRblocks.spaceStationFloorFixed.asFloor();
+        Floor background = mindustry.content.Blocks.empty.asFloor();
+        Floor ground = Blocks.spaceStationFloorFixed.asFloor();
 
         tiles.eachTile(t -> t.setFloor(background));
 
