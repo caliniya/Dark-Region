@@ -1,5 +1,19 @@
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+
+    val kotlinVersion = "2.0.0"
+
+    dependencies {
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}")
+    }
+}
+
 plugins {
     java
+    kotlin("jvm") version "2.0.0"
 }
 
 repositories {
@@ -13,6 +27,7 @@ val mindustryVersion = "v146"
 val jabelVersion = "93fde537c7"
 
 dependencies {
+    api(kotlin("stdlib", "2.0.0"))
     compileOnly("com.github.Anuken.Arc:arc-core:${mindustryVersion}")
     compileOnly("com.github.Anuken.Mindustry:core:${mindustryVersion}")
     implementation("com.github.liplum:MultiCrafterLib:v1.8")
@@ -29,14 +44,13 @@ version = layout.projectDirectory.file("mod.hjson").asFile.reader().buffered().l
             .replace(Regex("\",?$"), "")
     }.toList().firstOrNull() ?: "undefined"
 
-
 val sdkHome: String = System.getenv("ANDROID_HOME")
     ?: System.getenv("ANDROID_SDK_ROOT")
     ?: "${System.getenv("HOME")}/Android/Sdk"
 
 java {
     sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_1_8
 }
 
 allprojects {
