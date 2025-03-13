@@ -5,13 +5,14 @@ import mindustry.graphics.g3d.*;
 import mindustry.type.*;
 import mindustry.world.meta.*;
 import mindustry.Vars;
+import mindustry.content.Planets;
 
 public class SpaceStations {
     public static Planet
             SpaceStationGalinia;
     
     public static void load() {
-        SpaceStationGalinia = new Planet("space-station-galinia",Vars.content.planet("深暗之地-加利尼亚"),0.001f){{
+        SpaceStationGalinia = new Planet("space-station-galinia",Planets.sun,0.05f){{
             bloom = true;
             
             generator = new SpaceStationGenerator();

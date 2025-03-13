@@ -1,6 +1,6 @@
 #define HIGHP
 
-//shades of cryofluid
+//shades of cryofluid冷冻液的阴影。
 #define S2 vec3(192.0, 236.0, 255.0) / 100.0
 #define S1 vec3(135.0, 206.0, 235.0) / 100.0
 #define NSCALE 100.0 / 2.0

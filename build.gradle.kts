@@ -73,36 +73,39 @@ tasks.withType<Jar> {
 
 tasks.register("jarAndroid") {
     dependsOn("jar")
+    
     doLast {
         if (!File(sdkHome).exists()) throw GradleException("No valid Android SDK found. Ensure that ANDROID_HOME is set to your Android SDK directory.")
-
-        val platformRoot =
-            File("${sdkHome}/platforms/").listFiles()?.find { File(it!!, "android.jar").exists() }
-                ?: throw GradleException("No android.jar found. Ensure that you have an Android platform installed.")
-
-        val buildToolRoot =
-            File("${sdkHome}/build-tools/").listFiles()?.find { File(it, "d8").exists() }
-                ?: throw GradleException("No d8 found. Ensure that you have an Android build-tool installed.")
-
-        //dex and desugar files - this requires d8 in your PATH
-        project.exec {
-            commandLine(ArrayList<String>().apply {
-                add(File(buildToolRoot, "d8").absolutePath)
-                //collect dependencies needed for desugaring
-                addAll(listOf(
-                    *configurations.compileClasspath.get().toList().toTypedArray(),
-                    *configurations.runtimeClasspath.get().toList().toTypedArray(),
-                    File(platformRoot, "android.jar")
-                ).flatMap {
-                    listOf("--classpath", it.absolutePath)
-                })
-                add("--min-api")
-                add("14")
-                add("--output")
-                add("${project.name}-v${project.version}-Android.jar")
-                add("${project.name}-v${project.version}-Desktop.jar")
-            })
-            workingDir = File("${buildDir}/libs/")
+        
+        val buildToolRoot = File("${sdkHome}/build-tools/")
+            .listFiles()
+            ?.find { File(it, "lib/d8.jar").exists() }  // 修改这里，检查d8.jar的存在
+            ?: throw GradleException("No d8.jar found. Ensure that you have an Android build-tools 26.0.0+ installed.")
+        
+        val platformRoot = File("${sdkHome}/platforms/")
+            .listFiles()
+            ?.find { File(it, "android.jar").exists() }
+            ?: throw GradleException("No android.jar found. Ensure that you have an Android platform installed.")
+        
+        // 获取所有依赖路径
+        val dependencies = configurations.compileClasspath.get() + configurations.runtimeClasspath.get()
+        
+        // 构建classpath参数
+        val classpathArgs = dependencies.flatMap { 
+            listOf("--classpath", it.absolutePath) 
+        } + listOf("--classpath", File(platformRoot, "android.jar").absolutePath)
+        
+        exec {
+            workingDir = File(buildDir, "libs")
+            commandLine = listOf(
+    "java", "-cp", File(buildToolRoot, "lib/d8.jar").absolutePath, "com.android.tools.r8.D8"
+) + classpathArgs + listOf(
+    "--min-api",
+    "14",
+    "--output",
+    "${project.name}-v${project.version}-Android.jar",
+    "${project.name}-v${project.version}-Desktop.jar"
+)
         }
     }
 }
