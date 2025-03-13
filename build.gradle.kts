@@ -49,8 +49,10 @@ val sdkHome: String = System.getenv("ANDROID_HOME")
     ?: "${System.getenv("HOME")}/Android/Sdk"
 
 java {
+    // 告诉 idea 使用 java 17 开发
     sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
+    // 突然想起了已经设置了编译参数 --release 8，设置这个基本没啥意义了
+    //targetCompatibility = JavaVersion.VERSION_17
 }
 
 allprojects {
