@@ -1,6 +1,6 @@
 package darkRegion;
 
-import darkRegion.content.Blocks;
+import darkRegion.content.DRBlocks;
 import darkRegion.content.SpaceStations;
 import arc.util.Log;
 import mindustry.mod.Mod;
@@ -13,7 +13,7 @@ public class DarkRegion extends Mod {
     @Override
     public void loadContent() {
         Log.debug("Loading Blocks...");
-        Blocks.load();
+        DRBlocks.load();
         Log.debug("Loading SpaceStations...");
         SpaceStations.load();
     }

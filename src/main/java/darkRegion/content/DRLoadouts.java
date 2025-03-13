@@ -3,7 +3,7 @@ package darkRegion.content;
 import mindustry.game.Schematic;
 import mindustry.game.Schematics;
 
-public class Loadouts {
+public class DRLoadouts {
     public static Schematic
             basicSpaceStations;
 

@@ -11,20 +11,20 @@ import mindustry.world.blocks.environment.Floor;
 import static mindustry.Vars.state;
 import static mindustry.Vars.world;
 
-import darkRegion.content.Loadouts;
-import darkRegion.content.Blocks;
+import darkRegion.content.DRLoadouts;
+import darkRegion.content.DRBlocks;
 import darkRegion.util.WorldDef;
 
 public class SpaceStationGenerator extends BlankPlanetGenerator {
-    public Block core = Blocks.highTemperatureCore;
+    public Block core = DRBlocks.highTemperatureCore;
     
     @Override
     public void generate() {
-        defaultLoadout = Loadouts.basicSpaceStations;
+        defaultLoadout = DRLoadouts.basicSpaceStations;
         int sx = width / 2, sy = height / 2;
 
         Floor background = mindustry.content.Blocks.empty.asFloor();
-        Floor ground = Blocks.spaceStationFloorFixed.asFloor();
+        Floor ground = DRBlocks.spaceStationFloorFixed.asFloor();
 
         tiles.eachTile(t -> t.setFloor(background));
 
