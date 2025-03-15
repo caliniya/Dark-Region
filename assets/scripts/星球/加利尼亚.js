@@ -78,6 +78,7 @@ var 加利尼亚 = extend(Planet, "加利尼亚", Planets.sun, 1, 4, {
   clearSectorOnLose: false, // 区块输了是否重置区块
   tidalLock: false, // 是否潮汐锁定
   prebuildBase: true, // 是否需要着陆建筑特效
+  orbitRadius : 20,//轨道半径
 
   // 区块地图加载时的规则设置
   ruleSetter: r => {
@@ -114,7 +115,7 @@ var 加利尼亚 = extend(Planet, "加利尼亚", Planets.sun, 1, 4, {
 
     // 渲染星球表面地形的MeshLoader
     this.meshLoader = () => new HexMesh(this,
-      7.26);
+      7);
 
     // 渲染星球云层的MeshLoader
     this.cloudMeshLoader = () => new MultiMesh(
