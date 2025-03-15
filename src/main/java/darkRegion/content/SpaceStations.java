@@ -1,6 +1,8 @@
 package darkRegion.content;
 
+import darkRegion.world.meta.DREnv;
 import darkRegion.space.SpaceStationGenerator;
+import darkRegion.world.meta.DREnv;
 import mindustry.graphics.g3d.*;
 import mindustry.type.*;
 import mindustry.world.meta.*;
@@ -12,7 +14,7 @@ public class SpaceStations {
             SpaceStationGalinia;
     
     public static void load() {
-        SpaceStationGalinia = new Planet("space-station-galinia",Planets.sun,0.05f){{
+        SpaceStationGalinia = new Planet("space-station-galinia",Vars.content.planet("深暗之地-加利尼亚"),0.05f){{
             bloom = true;
             
             generator = new SpaceStationGenerator();
@@ -22,10 +24,10 @@ public class SpaceStations {
             updateLighting = false;
             drawOrbit = true;
             accessible = true;
-            clipRadius = 2;
+            clipRadius = 4;
             orbitRadius = parent.radius + 1f;
             alwaysUnlocked = true;
-            defaultEnv = Env.space;
+            defaultEnv = Env.space | DREnv.omurlo | DREnv.twin;
             allowWaves = false;
             defaultCore = Vars.content.block("深暗之地-高温核心");
         }};

@@ -10,7 +10,7 @@ require("星球/加利尼亚");
 require("星球/核心")
 require("重引/液体")//液体
 require("特效/液体池效果")//动态效果
-require("base/碎甲弹")
+//require("base/碎甲弹")
 require("base/跳跃弹")
 MapResizeDialog.minSize = 0
 MapResizeDialog.maxSize = 500000

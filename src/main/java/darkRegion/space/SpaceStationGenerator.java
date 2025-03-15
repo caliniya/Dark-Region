@@ -31,7 +31,7 @@ public class SpaceStationGenerator extends BlankPlanetGenerator {
         WorldDef.getAreaTile(new Vec2(sx, sy), core.size + 4, core.size + 4).each(t -> {
             t.setFloor(ground);
         });
-        world.tile(sx + core.size / 2 + 3, sy + core.size / 2 + 3).setBlock(core, Team.sharded);
+        world.tile(sx + core.size / 2 + 4, sy + core.size / 2 + 4).setBlock(core, Team.sharded);
 
         state.rules.planetBackground = new PlanetParams() {{
             planet = sector.planet.parent;
