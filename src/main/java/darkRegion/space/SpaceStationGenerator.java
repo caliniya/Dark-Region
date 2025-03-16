@@ -38,7 +38,7 @@ public class SpaceStationGenerator extends BlankPlanetGenerator {
             camPos.setZero();
             sector.planet.addParentOffset(camPos);
             camPos.scl(0.5f);
-            zoom = 0.3f;
+            zoom = 0.1f;
         }};
 
         state.rules.dragMultiplier = 0.4f; 

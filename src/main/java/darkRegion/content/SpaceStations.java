@@ -28,7 +28,7 @@ public class SpaceStations {
             camRadius = 2;
             launchCapacityMultiplier = 1;
             prebuildBase = true;
-            orbitRadius = parent.radius + 1f;
+            orbitRadius = parent.radius + 0.5f;
             orbitTime = 6;
             alwaysUnlocked = true;
             defaultEnv = Env.space | DREnv.omurlo | DREnv.twin;

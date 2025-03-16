@@ -115,47 +115,21 @@ var 加利尼亚 = extend(Planet, "加利尼亚", Planets.sun, 1, 4, {
 
     // 渲染星球表面地形的MeshLoader
     this.meshLoader = () => new HexMesh(this,
-      7);
+      6);
 
     // 渲染星球云层的MeshLoader
     this.cloudMeshLoader = () => new MultiMesh(
-      new HexSkyMesh(this, 5, 0.3, 0.17, 8, Object.assign(new Color().set(colorSrc).mul(0.9), {
-        a: 0.6
-      }), 9, 0.1, 0.9, 0.38),
-      new HexSkyMesh(this, 15, 0.6, 0.16, 9, Object.assign(new Color().set(colorSrc), {
-        a: 0.9
-      }), 6, 0, 1, 0.28),
-      new HexSkyMesh(this, 10, 0.6, 0.16, 2, Object.assign(Color.white.cpy().lerp(colorDst, 0.9), {
-        a: 0.6
-      }), 8, 0.1, 1, 0.28),
-      new HexSkyMesh(this, 15, 0.6, 0.15, 7, Object.assign(Color.white.cpy().lerp(colorDst, 0.9), {
-        a: 0.6
-      }), 3, 0.1, 1, 0.28),
-      new HexSkyMesh(this, 15, 0.6, 0.14, 3, Object.assign(new Color().set(colorSrc), {
-        a: 0.9
-      }), 4, 0.1, 1, 0.28),
-      new HexSkyMesh(this, 15, 0.8, 0.14, 5, Object.assign(new Color().set(colorSrc), {
-        a: 0.9
-      }), 8, 0.1, 1, 0.28),
-      new HexSkyMesh(this, 15, 0.4, 0.15, 5, Object.assign(new Color().set(colorSrc), {
-        a: 0.9
-      }), 6, 0, 1, 0.21),
-      new HexSkyMesh(this, 10, 0.6, 0.16, 5, Object.assign(new Color().set(colorSrc), {
-        a: 0.8
-      }), 4, 0, 1, 0.28),
-      new HexSkyMesh(this, 25, 0.6, 0.15, 4, Object.assign(new Color().set(colorSrc), {
-        a: 0.9
-      }), 6, 0, 1, 0.28),
-      new HexSkyMesh(this, 20, 0.6, 0.14, 5, Object.assign(new Color().set(colorSrc), {
-        a: 0.8
-      }), 8, 0, 1, 0.28),
-    );
-
+        new HexSkyMesh(this, 11, 0.15, 0.13, 5, Object.assign(new Color().set(colorSrc), {a: 0.8}), 2, 0.45, 0.9, 0.38),
+        new HexSkyMesh(this, 1, 0.6, 0.16, 5, Object.assign(Color.white.cpy().lerp(colorDst, 0.9), {a: 0.6}), 2, 0.45, 1.0, 0.41),
+        new HexSkyMesh(this, 11, 0.15, 0.13, 5, Object.assign(new Color().set(colorSrc), {a: 0.8}), 2, 0.45, 0.9, 0.38),
+        new HexSkyMesh(this, 1, 0.6, 0.16, 5, Object.assign(Color.white.cpy().lerp(colorDst, 0.9), {a: 0.6}), 2, 0.45, 1.0, 0.41),
+        new HexSkyMesh(this, 11, 0.15, 0.13, 5, Object.assign(new Color().set(colorSrc), {a: 0.8}), 2, 0.45, 0.9, 0.38),
+        new HexSkyMesh(this, 1, 0.6, 0.16, 5, Object.assign(Color.white.cpy().lerp(colorDst, 0.9), {a: 0.6}), 2, 0.45, 1.0, 0.41)
+  );
     // 隐藏在星球上的物品
     this.hiddenItems.addAll(
       Items.lead,
       Items.copper,
-      Items.titanium,
       Items.phaseFabric,
       Items.pyratite,
       Items.blastCompound,
