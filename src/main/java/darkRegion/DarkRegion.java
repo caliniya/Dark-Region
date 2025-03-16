@@ -2,6 +2,8 @@ package darkRegion;
 
 import darkRegion.content.DRBlocks;
 import darkRegion.content.SpaceStations;
+import darkRegion.entities.ability.shield_suppression;
+
 import arc.util.Log;
 import mindustry.mod.Mod;
 
