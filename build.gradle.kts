@@ -93,8 +93,10 @@ tasks.register("jarAndroid") {
         if (!File(sdkHome).exists()) throw GradleException("No valid Android SDK found. Ensure that ANDROID_HOME is set to your Android SDK directory.")
 
         val d8 = File("${sdkHome}/build-tools/").listFiles()
-            ?.firstOrNull { File(it, "d8").exists() || File(it, "d8.bat").exists() }
-            ?.let { if (File(it, "d8").exists()) File(it, "d8") else File(it, "d8.bat") }
+            //?.firstOrNull { File(it, "d8").exists() || File(it, "d8.bat").exists() }
+            //?.let { if (File(it, "d8").exists()) File(it, "d8") else File(it, "d8.bat") }
+            ?.firstOrNull { File(it, "lib/d8.jar").exists()  }
+            ?.let { File(it, "lib/d8.jar") }
             ?: throw GradleException("No d8 found. Ensure that you have an Android build-tools 26.0.0+ installed.")
 
         val androidJar = File("${sdkHome}/platforms/").listFiles()
@@ -108,7 +110,8 @@ tasks.register("jarAndroid") {
         exec {
             workingDir = libsDir
             commandLine = listOf(
-                d8.absolutePath,
+                //d8.absolutePath,
+                "java", "-cp", d8.absolutePath, "com.android.tools.r8.D8",
                 *dependencies.flatMap { listOf("--classpath", it.absolutePath) }.toTypedArray(),
                 "--classpath", androidJar.absolutePath,
                 "--min-api", "14",
