@@ -34,7 +34,7 @@ dependencies {
     //annotationProcessor("com.github.Anuken:jabel:$jabelVersion")
 }
 
-group = "meow0x7e"
+group = "caliniya"
 version = layout.projectDirectory.file("mod.hjson").asFile.reader().buffered().lines()
     .filter {
         (!Regex("^\\s*//.*$").matches(it) && Regex("^\\s*\"version\": ?\".*\",?$").matches(it))

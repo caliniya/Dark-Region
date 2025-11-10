@@ -1,4 +1,4 @@
-package DarkRegion_ky
+package DarkRegion
 
 import darkRegion.content.DRBlocks
 import darkRegion.content.SpaceStations
