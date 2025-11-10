@@ -1,128 +1,129 @@
+import org.hjson.JsonObject.readHjson
+
 buildscript {
     repositories {
         mavenLocal()
         mavenCentral()
     }
 
-    val kotlinVersion = "2.0.0"
-
     dependencies {
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}")
+        // https://mvnrepository.com/artifact/org.hjson/hjson
+        classpath("org.hjson:hjson:3.1.0")
     }
 }
 
-plugins {
-    java
-    kotlin("jvm") version "2.0.0"
-}
+plugins { java }
 
 repositories {
     mavenLocal()
     mavenCentral()
-    maven { url = uri("https://ghproxy.net/raw.githubusercontent.com/Zelaux/MindustryRepo/master/repository") }
-    maven { url = uri("https://www.jitpack.io") }
+    maven { url = uri("https://raw.githubusercontent.com/Zelaux/MindustryRepo/master/repository") }
+    //maven { url = uri("https://www.jitpack.io") }
 }
 
 val mindustryVersion = "v146"
-val jabelVersion = "93fde537c7"
 
 dependencies {
-    api(kotlin("stdlib", "2.0.0"))
+    // https://mvnrepository.com/artifact/com.github.Anuken.Arc/arc-core
     compileOnly("com.github.Anuken.Arc:arc-core:${mindustryVersion}")
+    // https://mvnrepository.com/artifact/com.github.Anuken.Mindustry/core
     compileOnly("com.github.Anuken.Mindustry:core:${mindustryVersion}")
-    //这个有点问题，但暂时用不到它，就不修了
-    //annotationProcessor("com.github.Anuken:jabel:$jabelVersion")
 }
 
-group = "caliniya"
-version = layout.projectDirectory.file("mod.hjson").asFile.reader().buffered().lines()
-    .filter {
-        (!Regex("^\\s*//.*$").matches(it) && Regex("^\\s*\"version\": ?\".*\",?$").matches(it))
-    }.map {
-        it.replace(Regex("^\\s*\"version\": ?\""), "")
-            .replace(Regex("\",?$"), "")
-    }.toList().firstOrNull() ?: "undefined"
+group = "meow0x7e"
+// 通过解析 mod.hjson 获取 version 字段
+version = try {
+    // 读取并解析 mod.hjson
+    val json = readHjson(layout.projectDirectory.file("mod.hjson").asFile.bufferedReader()).run {
+        if (!isObject) throw GradleException("mod.hjson 根元素应为对象，实际为 $type")
+        asObject()
+    }
 
+    // 获取 version 字段
+    json.get("version").run {
+        if (!isString) throw GradleException("version 字段应为字符串，实际为 $type")
+        asString()
+    }
+} catch (e: Exception) {
+    throw GradleException("解析 mod.hjson 失败: ${e.message}", e)
+}
+
+// 很多地方用到的字段，我统一用常量存储，方便修改。
+val androidJarName = "${project.name}-v${project.version}-Android.jar"
+val desktopJarName = "${project.name}-v${project.version}-Desktop.jar"
+val deployJarName = "${project.name}-v${project.version}.jar"
+val libsDir = File(buildDir, "libs")
+val androidJarPath = File(libsDir, androidJarName)
+val desktopJarPath = File(libsDir, desktopJarName)
+
+// Android SDK 的路径
 val sdkHome: String = System.getenv("ANDROID_HOME")
     ?: System.getenv("ANDROID_SDK_ROOT")
     ?: "${System.getenv("HOME")}/Android/Sdk"
 
+// 设置 Java 版本
 java {
-    // 告诉 idea 使用 java 17 开发
     sourceCompatibility = JavaVersion.VERSION_17
-    // 突然想起了已经设置了编译参数 --release 8，设置这个基本没啥意义了
-    //targetCompatibility = JavaVersion.VERSION_17
-}
-
-allprojects {
-    tasks.withType(JavaCompile::class.java).apply {
-        configureEach {
-            options.compilerArgs.addAll(listOf("--release", "8"))
-        }
-    }
+    targetCompatibility = JavaVersion.VERSION_17
 }
 
 tasks.withType<Jar> {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-    archiveFileName.set("${project.name}-v${project.version}-Desktop.jar")
+    archiveFileName.set(desktopJarName)
 
-    from(configurations.runtimeClasspath.get().toList()
-        .map { if (it.isDirectory) it else zipTree(it) })
-    from("assets/") { include("**") }
+    // 合并依赖进产物中
+    from(configurations.runtimeClasspath.get().toList().map { if (it.isDirectory) it else zipTree(it) })
+
+    // 包含 assets 目录中的内容
+    from("assets") { include("**") }
+    // 包含 icon.png 和 mod.hjson
     from("icon.png", "mod.hjson")
 }
 
 tasks.register("jarAndroid") {
     dependsOn("jar")
-    
+
     doLast {
         if (!File(sdkHome).exists()) throw GradleException("No valid Android SDK found. Ensure that ANDROID_HOME is set to your Android SDK directory.")
-        
-        val buildToolRoot = File("${sdkHome}/build-tools/")
-            .listFiles()
-            ?.find { File(it, "lib/d8.jar").exists() }  // 修改这里，检查d8.jar的存在
-            ?: throw GradleException("No d8.jar found. Ensure that you have an Android build-tools 26.0.0+ installed.")
-        
-        val platformRoot = File("${sdkHome}/platforms/")
-            .listFiles()
-            ?.find { File(it, "android.jar").exists() }
+
+        val d8 = File("${sdkHome}/build-tools/").listFiles()
+            ?.firstOrNull { File(it, "d8").exists() || File(it, "d8.bat").exists() }
+            ?.let { if (File(it, "d8").exists()) File(it, "d8") else File(it, "d8.bat") }
+            ?: throw GradleException("No d8 found. Ensure that you have an Android build-tools 26.0.0+ installed.")
+
+        val androidJar = File("${sdkHome}/platforms/").listFiles()
+            ?.firstOrNull { File(it, "android.jar").exists() }
+            ?.let { File(it, "android.jar") }
             ?: throw GradleException("No android.jar found. Ensure that you have an Android platform installed.")
-        
+
         // 获取所有依赖路径
         val dependencies = configurations.compileClasspath.get() + configurations.runtimeClasspath.get()
-        
-        // 构建classpath参数
-        val classpathArgs = dependencies.flatMap { 
-            listOf("--classpath", it.absolutePath) 
-        } + listOf("--classpath", File(platformRoot, "android.jar").absolutePath)
-        
+
         exec {
-            workingDir = File(buildDir, "libs")
+            workingDir = libsDir
             commandLine = listOf(
-    "java", "-cp", File(buildToolRoot, "lib/d8.jar").absolutePath, "com.android.tools.r8.D8"
-) + classpathArgs + listOf(
-    "--min-api",
-    "14",
-    "--output",
-    "${project.name}-v${project.version}-Android.jar",
-    "${project.name}-v${project.version}-Desktop.jar"
-)
+                d8.absolutePath,
+                *dependencies.flatMap { listOf("--classpath", it.absolutePath) }.toTypedArray(),
+                "--classpath", androidJar.absolutePath,
+                "--min-api", "14",
+                "--output", androidJarName,
+                desktopJarName
+            )
+            standardOutput = System.out
+            errorOutput = System.err
         }
     }
 }
 
+// 合并产物压缩包为一个
 tasks.register("deploy", Jar::class) {
     dependsOn(tasks.getByName("jarAndroid"), "jar")
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-    archiveFileName.set("${project.name}-v${project.version}.jar")
+    archiveFileName.set(deployJarName)
 
-    from(
-        zipTree("${buildDir}/libs/${project.name}-v${project.version}-Desktop.jar"),
-        zipTree("${buildDir}/libs/${project.name}-v${project.version}-Android.jar")
-    )
+    // 要合并的压缩包
+    from(zipTree(desktopJarPath), zipTree(androidJarPath))
 
-    doLast {
-        delete("${buildDir}/libs/${project.name}-v${project.version}-Desktop.jar")
-        delete("${buildDir}/libs/${project.name}-v${project.version}-Android.jar")
-    }
+    // 完成后删除被合并的压缩包
+    doLast { delete(desktopJarPath, androidJarPath) }
 }
