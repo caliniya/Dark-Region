@@ -13,7 +13,6 @@
         {"item": "铱", "amount": 2000},  
         {"item": "银", "amount": 4000},  
     ],
-    "buildSpeed": 0.3,  // 建造速度
     "researchCostMultiplier": 0.1,  // 研究成本倍增器
     "category": "effect",  // 类别
     "research": {

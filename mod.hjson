@@ -11,7 +11,7 @@
     // Mod 版本
     "version": "0.2.3",
     // 最小游戏版本
-    "minGameVersion": "146",
+    "minGameVersion": "153",
     // 在 Mod 浏览器中隐藏，启用也会导致入口类的 loadContent 无法被执行，只要不将仓库的 topic 添加上 mindustry-mod 就不会被扫描到
     "hidden": false,
     // Mod 入口类

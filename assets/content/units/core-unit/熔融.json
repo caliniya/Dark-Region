@@ -35,7 +35,6 @@
   // 转速
   "itemCapacity": 30,
   // 容量
-  "range": 40
 //  "abilities":[{
 //  "type":"shield_suppression"
 //  }]

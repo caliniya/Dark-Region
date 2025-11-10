@@ -1,4 +1,5 @@
-// 导入所需的基础库和核心模块
+// 导入所需的核心块
+//如果你没有自己的核心的话，就把这行删掉
 const {
   高温核心
 } = require("星球/核心");
@@ -13,7 +14,7 @@ const blackSandColor = Color.valueOf("777777");
 const polarIceBlueColor = Color.valueOf("80C8E0");
 
 /**
-* 创建一个名为"加利尼亚"的星球模组
+* 创建一个名为"加利尼亚"的星球
 * @param {String} name - 星球名称
 * @param {Planet} parent - 母星对象 (可为null)
 * @param {float} radius - 星球半径（单位: 个赛普罗）
@@ -105,7 +106,8 @@ var 加利尼亚 = extend(Planet, "加利尼亚", Planets.sun, 1, 4, {
     {
       a: 0.5
     }), // 着陆时的云烟颜色
-  defaultCore: 高温核心, // 默认核心
+  defaultCore: 高温核心, // 星球的默认核心
+  //如果没有自己的核心，请改用Blocks.coreShard
 
   /**
   * 初始化星球
@@ -126,7 +128,8 @@ var 加利尼亚 = extend(Planet, "加利尼亚", Planets.sun, 1, 4, {
         new HexSkyMesh(this, 11, 0.15, 0.13, 5, Object.assign(new Color().set(colorSrc), {a: 0.8}), 2, 0.45, 0.9, 0.38),
         new HexSkyMesh(this, 1, 0.6, 0.16, 5, Object.assign(Color.white.cpy().lerp(colorDst, 0.9), {a: 0.6}), 2, 0.45, 1.0, 0.41)
   );
-    // 隐藏在星球上的物品
+    /* 
+    隐藏在星球上的物品
     this.hiddenItems.addAll(
       Items.lead,
       Items.copper,
@@ -151,6 +154,7 @@ var 加利尼亚 = extend(Planet, "加利尼亚", Planets.sun, 1, 4, {
     this.unlockedOnLand.addAll(
       // 解锁的物品
     );
+    */
   },
 });
 

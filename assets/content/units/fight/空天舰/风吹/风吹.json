@@ -19,8 +19,6 @@
   // 是否能攻击空中单位
   "targetGround": true,
   // 是否能攻击地面单位
-  "targetHealing": false,
-  // 是否能治疗单位
   "health": 2000,
   // 生命值
   "armor": 5,
@@ -29,14 +27,19 @@
   // 转速
   "itemCapacity": 30,
   // 容量
+  "lowAltitude":true,
+  //子弹绘制在单位上方
+  "faceTarget": false,
+  //炮塔转本体不转
+    
 
   "weapons": [{
-    "x": 3,
+    "x": 6.5,
     // 位置 x 坐标
-    "y": -6,
-    "name": "-武器"
+    "y": -6.5,
+    "name": "风吹-舷炮"
     // 位置 y 坐标
-    "mirror":true,
+    "mirror": true,
     // 是否镜像
     "reload": 4,
     // 装弹速度
@@ -64,10 +67,6 @@
       // 是否与地面碰撞
       "collidesAir": true,
       // 是否与空中单位碰撞
-      "targetUnits": true,
-      // 是否能攻击单位
-      "targetBuildings": true,
-      // 是否能攻击建筑
     }
   }]
 }
