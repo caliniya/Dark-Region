@@ -7,12 +7,17 @@ buildscript {
     }
 
     dependencies {
+        // https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-gradle-plugin
+        //classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:2.0.0")
         // https://mvnrepository.com/artifact/org.hjson/hjson
         classpath("org.hjson:hjson:3.1.0")
     }
 }
 
-plugins { java }
+plugins {
+    java
+    //kotlin("jvm") version "2.0.0"
+}
 
 repositories {
     mavenLocal()
@@ -24,28 +29,29 @@ repositories {
 val mindustryVersion = "v146"
 
 dependencies {
+    //api(kotlin("stdlib", "2.0.0"))
     // https://mvnrepository.com/artifact/com.github.Anuken.Arc/arc-core
     compileOnly("com.github.Anuken.Arc:arc-core:${mindustryVersion}")
     // https://mvnrepository.com/artifact/com.github.Anuken.Mindustry/core
     compileOnly("com.github.Anuken.Mindustry:core:${mindustryVersion}")
 }
 
-group = "meow0x7e"
+group = "caliniya"
 // 通过解析 mod.hjson 获取 version 字段
 version = try {
     // 读取并解析 mod.hjson
     val json = readHjson(layout.projectDirectory.file("mod.hjson").asFile.bufferedReader()).run {
-        if (!isObject) throw GradleException("mod.hjson 根元素应为对象，实际为 $type")
+        if (!isObject) throw GradleException("mod.hjson root element must be a JSON object (found: $type)")
         asObject()
     }
 
     // 获取 version 字段
     json.get("version").run {
-        if (!isString) throw GradleException("version 字段应为字符串，实际为 $type")
+        if (!isString) throw GradleException("'version' field must be a string value (found: $type)")
         asString()
     }
 } catch (e: Exception) {
-    throw GradleException("解析 mod.hjson 失败: ${e.message}", e)
+    throw GradleException("Failed to parse mod.hjson: ${e.message}", e)
 }
 
 // 很多地方用到的字段，我统一用常量存储，方便修改。
