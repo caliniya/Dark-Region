@@ -1,6 +1,8 @@
 package darkRegion;
 
 import darkRegion.content.DRBlocks;
+import darkRegion.content.DRUnitTypes;
+import darkRegion.content.DRUnits;
 import darkRegion.content.SpaceStations;
 import darkRegion.entities.ability.shield_suppression;
 import darkRegion.DarkRegionKT;
@@ -21,5 +23,6 @@ public class DarkRegion extends Mod {
         DRBlocks.load();
         Log.debug("Loading SpaceStations...");
         SpaceStations.load();
+        DRUnits.load();
     }
 }
