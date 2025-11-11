@@ -2,7 +2,6 @@ package darkRegion;
 
 import darkRegion.content.*;
 import darkRegion.entities.ability.shield_suppression;
-import darkRegion.DarkRegionKT;
 
 import arc.util.Log;
 import mindustry.mod.Mod;
