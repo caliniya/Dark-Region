@@ -1,9 +1,6 @@
 package darkRegion;
 
-import darkRegion.content.DRBlocks;
-import darkRegion.content.DRUnitTypes;
-import darkRegion.content.DRUnits;
-import darkRegion.content.SpaceStations;
+import darkRegion.content.*;
 import darkRegion.entities.ability.shield_suppression;
 import darkRegion.DarkRegionKT;
 

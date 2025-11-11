@@ -56,7 +56,7 @@ version = try {
 
 // 很多地方用到的字段，我统一用常量存储，方便修改。
 // 感谢 Meow0x7E 的帮助
-val androidJarName = "${project.name}-v${project.version}-Android.jar"
+val androidJarName = "${project.name}-v${project.version}-Dex.jar"
 val desktopJarName = "${project.name}-v${project.version}-Desktop.jar"
 val deployJarName = "${project.name}-v${project.version}.jar"
 val libsDir = File(buildDir, "libs")
