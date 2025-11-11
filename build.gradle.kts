@@ -8,7 +8,7 @@ buildscript {
 
     dependencies {
         // https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-gradle-plugin
-        //classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:2.0.0")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:2.0.0")
         // https://mvnrepository.com/artifact/org.hjson/hjson
         classpath("org.hjson:hjson:3.1.0")
     }
@@ -16,20 +16,20 @@ buildscript {
 
 plugins {
     java
-    //kotlin("jvm") version "2.0.0"
+    kotlin("jvm") version "2.0.0"
 }
 
 repositories {
     mavenLocal()
     mavenCentral()
     maven { url = uri("https://raw.githubusercontent.com/Zelaux/MindustryRepo/master/repository") }
-    //maven { url = uri("https://www.jitpack.io") }
+    maven { url = uri("https://www.jitpack.io") }
 }
 
 val mindustryVersion = "v146"
 
 dependencies {
-    //api(kotlin("stdlib", "2.0.0"))
+    api(kotlin("stdlib", "2.0.0"))
     // https://mvnrepository.com/artifact/com.github.Anuken.Arc/arc-core
     compileOnly("com.github.Anuken.Arc:arc-core:${mindustryVersion}")
     // https://mvnrepository.com/artifact/com.github.Anuken.Mindustry/core
@@ -55,6 +55,7 @@ version = try {
 }
 
 // 很多地方用到的字段，我统一用常量存储，方便修改。
+// 感谢 Meow0x7E 的帮助
 val androidJarName = "${project.name}-v${project.version}-Android.jar"
 val desktopJarName = "${project.name}-v${project.version}-Desktop.jar"
 val deployJarName = "${project.name}-v${project.version}.jar"
