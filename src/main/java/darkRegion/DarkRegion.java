@@ -19,6 +19,6 @@ public class DarkRegion extends Mod {
         DRUnits.load();
         DRItems.load();
         JsonLoad.load();
-        SpaceStations.load();
+        DRPlanet.load();
     }
 }

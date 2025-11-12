@@ -4,11 +4,11 @@
     // Mod 游戏内显示名称
     "displayName": "深暗之地",
     // 作者
-    "author": "caliniya/代码\n依依/贴图\nE/音乐(在做)\nMeow0x7E/代码",
+    "author": "caliniya\nMeow0x7E",
     // Mod 介绍
-    "description": "无",
+    "description": "新的单位，新的星球，新的科技\n此模组致力于创造一个新的世界观",
     // Mod 版本
-    "version": "0.2.3",
+    "version": "0.0.1",
     // 最小游戏版本
     "minGameVersion": "151",
     // 在 Mod 浏览器中隐藏，启用也会导致入口类的 loadContent 无法被执行，只要不将仓库的 topic 添加上 mindustry-mod 就不会被扫描到
