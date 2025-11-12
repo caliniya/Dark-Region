@@ -2,7 +2,7 @@ package darkRegion.content;
 
 import darkRegion.content.*;
 import darkRegion.world.meta.DREnv;
-import darkRegion.space.SpaceStationGenerator;
+import darkRegion.map.*;
 import darkRegion.world.meta.DREnv;
 import mindustry.graphics.g3d.*;
 import mindustry.type.*;
@@ -12,10 +12,19 @@ import mindustry.content.Planets;
 
 public class DRPlanet {
 	public static Planet
-        SpaceStationGalinia;
+        加利尼亚空间站,
+        加利尼亚
+    ;
     
     public static void load() {
-        SpaceStationGalinia = new Planet("加利尼亚空间站",JsonLoad.加利尼亚,0.01f){{
+        加利尼亚 = new Planet("加利尼亚l" ,Planets.sun ,1f ,5){{
+            generator = new GaliniaGenerator();
+            
+            
+            
+        }};
+        
+        加利尼亚空间站 = new Planet("加利尼亚空间站",加利尼亚,0.01f){{
             bloom = false;//禁用光晕
             generator = new SpaceStationGenerator();
             mesh = new HexMesh(this, 0);

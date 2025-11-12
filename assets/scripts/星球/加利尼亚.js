@@ -129,6 +129,7 @@ var 加利尼亚 = extend(Planet, "加利尼亚", Planets.sun, 1, 4, {
         new HexSkyMesh(this, 1, 0.6, 0.16, 5, Object.assign(Color.white.cpy().lerp(colorDst, 0.9), {a: 0.6}), 2, 0.45, 1.0, 0.41)
   );
     /* 
+    此方法已被移除
     隐藏在星球上的物品
     this.hiddenItems.addAll(
       Items.lead,

@@ -1,4 +1,4 @@
-package darkRegion.space;
+package darkRegion.map;
 
 import arc.math.geom.Vec2;
 import mindustry.game.Team;
