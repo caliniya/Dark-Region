@@ -2,6 +2,7 @@
 
 package darkRegion.kt.content
 
+import darkRegion.kt.type.RecipeStack
 import arc.struct.Seq
 import arc.util.Log
 import darkRegion.kt.world.production.MultipleRecipeCrafter

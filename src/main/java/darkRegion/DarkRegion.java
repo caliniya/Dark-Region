@@ -1,7 +1,6 @@
 package darkRegion;
 
 import darkRegion.content.*;
-
 import darkRegion.kt.content.Blocks;
 import mindustry.mod.Mod;
 

@@ -137,6 +137,7 @@ tasks.register("deploy", Zip::class) {
     dependsOn("dexify", "jar")
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     archiveFileName.set(deployJarName)
+    destinationDirectory.set(libsDir)
 
     // 要合并的压缩包
     from(zipTree(desktopJarPath), zipTree(dexArchivePath))
