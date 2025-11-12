@@ -6,6 +6,7 @@ buildscript {
         mavenCentral()
     }
 
+    // 这个是构建脚本自己的需要的依赖
     dependencies {
         // https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-gradle-plugin
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:2.0.0")
@@ -28,6 +29,7 @@ repositories {
 
 val mindustryVersion = "v146"
 
+// 这个是项目的依赖
 dependencies {
     api(kotlin("stdlib", "2.0.0"))
     // https://mvnrepository.com/artifact/com.github.Anuken.Arc/arc-core
@@ -56,11 +58,11 @@ version = try {
 
 // 很多地方用到的字段，我统一用常量存储，方便修改。
 // 感谢 Meow0x7E 的帮助
-val androidJarName = "${project.name}-v${project.version}-Dex.jar"
-val desktopJarName = "${project.name}-v${project.version}-Desktop.jar"
+val dexArchiveName = "${project.name}-v${project.version}-dex.zip"
+val desktopJarName = "${project.name}-v${project.version}-desktop.jar"
 val deployJarName = "${project.name}-v${project.version}.jar"
 val libsDir = File(buildDir, "libs")
-val androidJarPath = File(libsDir, androidJarName)
+val dexArchivePath = File(libsDir, dexArchiveName)
 val desktopJarPath = File(libsDir, desktopJarName)
 
 // Android SDK 的路径
@@ -81,22 +83,25 @@ tasks.withType<Jar> {
     // 合并依赖进产物中
     from(configurations.runtimeClasspath.get().toList().map { if (it.isDirectory) it else zipTree(it) })
 
+    // 这俩可以当成一个简单的示例，回头如果有啥要加入产物压缩包的东西可以从这里加
     // 包含 assets 目录中的内容
     from("assets") { include("**") }
     // 包含 icon.png 和 mod.hjson
     from("icon.png", "mod.hjson")
 }
 
-tasks.register("jarAndroid") {
+tasks.register("dexify") {
+    group = "build"
     dependsOn("jar")
 
     doLast {
         if (!File(sdkHome).exists()) throw GradleException("No valid Android SDK found. Ensure that ANDROID_HOME is set to your Android SDK directory.")
 
         val d8 = File("${sdkHome}/build-tools/").listFiles()
+            // 这个被注释掉的原因是因为 AIDE 的 AndroidSDK 里的脚本没有可执行权限，所以得绕一下，直接用 java 调 jar
             //?.firstOrNull { File(it, "d8").exists() || File(it, "d8.bat").exists() }
             //?.let { if (File(it, "d8").exists()) File(it, "d8") else File(it, "d8.bat") }
-            ?.firstOrNull { File(it, "lib/d8.jar").exists()  }
+            ?.firstOrNull { File(it, "lib/d8.jar").exists() }
             ?.let { File(it, "lib/d8.jar") }
             ?: throw GradleException("No d8 found. Ensure that you have an Android build-tools 26.0.0+ installed.")
 
@@ -111,12 +116,13 @@ tasks.register("jarAndroid") {
         exec {
             workingDir = libsDir
             commandLine = listOf(
+                // 和上面的代码相互配合，所以被注释了
                 //d8.absolutePath,
                 "java", "-cp", d8.absolutePath, "com.android.tools.r8.D8",
                 *dependencies.flatMap { listOf("--classpath", it.absolutePath) }.toTypedArray(),
                 "--classpath", androidJar.absolutePath,
                 "--min-api", "14",
-                "--output", androidJarName,
+                "--output", dexArchiveName,
                 desktopJarName
             )
             standardOutput = System.out
@@ -127,13 +133,14 @@ tasks.register("jarAndroid") {
 
 // 合并产物压缩包为一个
 tasks.register("deploy", Jar::class) {
-    dependsOn(tasks.getByName("jarAndroid"), "jar")
+    group = "build"
+    dependsOn(tasks.getByName("dexify"), "jar")
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     archiveFileName.set(deployJarName)
 
     // 要合并的压缩包
-    from(zipTree(desktopJarPath), zipTree(androidJarPath))
+    from(zipTree(desktopJarPath), zipTree(dexArchivePath))
 
     // 完成后删除被合并的压缩包
-    doLast { delete(desktopJarPath, androidJarPath) }
+    doLast { delete(desktopJarPath, dexArchivePath) }
 }
