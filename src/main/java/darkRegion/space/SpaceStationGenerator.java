@@ -11,12 +11,11 @@ import mindustry.world.blocks.environment.Floor;
 import static mindustry.Vars.state;
 import static mindustry.Vars.world;
 
-import darkRegion.content.DRLoadouts;
-import darkRegion.content.DRBlocks;
+import darkRegion.content.*;
 import darkRegion.util.WorldDef;
 
 public class SpaceStationGenerator extends BlankPlanetGenerator {
-    public Block core = DRBlocks.highTemperatureCore;
+    public Block core = JsonLoad.高温核心;
     
     @Override
     public void generate() {

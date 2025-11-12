@@ -1,5 +1,6 @@
 package darkRegion.content;
 
+import darkRegion.content.*;
 import darkRegion.world.meta.DREnv;
 import darkRegion.space.SpaceStationGenerator;
 import darkRegion.world.meta.DREnv;
@@ -34,7 +35,7 @@ public class SpaceStations {
             defaultEnv = Env.space | DREnv.omurlo | DREnv.twin;
             allowWaves = false;
             
-            defaultCore = Vars.content.block("深暗之地-高温核心");
+            defaultCore = JsonLoad.高温核心;
         }};
     }
 }

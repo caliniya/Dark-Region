@@ -9,23 +9,20 @@ import mindustry.world.Block;
 public class DRBlocks {
     public static Block
     //STA
-    spaceStationFloor, spaceStationFloorFixed,
-    //core
-    highTemperatureCore;
+    spaceStationFloor, spaceStationFloorFixed
+    ;
 
 
     public static void load() {
-        spaceStationFloor = new ConnectFloor("space-station-floor") {{
+        spaceStationFloor = new ConnectFloor("空间站地板") {{
             blendGroup = mindustry.content.Blocks.empty;
             connects = Seq.with(this);
         }};
-        spaceStationFloorFixed = new ConnectFloor("space-station-floor-fixed"){{
+        spaceStationFloorFixed = new ConnectFloor("空间站地板fixed"){{
             variants = 0;
             blendGroup = Blocks.empty;
             connects = Seq.with(spaceStationFloor.asFloor(), this);
         }};
         ((ConnectFloor)spaceStationFloor.asFloor()).connects.add(spaceStationFloorFixed.asFloor());
-
-        highTemperatureCore = Vars.content.block("深暗之地-高温核心");
     }
 }
