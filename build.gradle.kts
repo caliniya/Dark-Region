@@ -132,9 +132,9 @@ tasks.register("dexify") {
 }
 
 // 合并产物压缩包为一个
-tasks.register("deploy", Jar::class) {
+tasks.register("deploy", Zip::class) {
     group = "build"
-    dependsOn(tasks.getByName("dexify"), "jar")
+    dependsOn("dexify", "jar")
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     archiveFileName.set(deployJarName)
 
@@ -143,4 +143,14 @@ tasks.register("deploy", Jar::class) {
 
     // 完成后删除被合并的压缩包
     doLast { delete(desktopJarPath, dexArchivePath) }
+}
+
+// dexify 很慢，如果只在桌面版测试可以省略 dexify 步骤
+tasks.register("fastDeploy") {
+    group = "build"
+    dependsOn("jar")
+
+    doFirst {
+        file(desktopJarPath).renameTo(File(libsDir, deployJarName))
+    }
 }

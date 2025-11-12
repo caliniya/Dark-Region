@@ -2,14 +2,14 @@ package darkRegion;
 
 import darkRegion.content.*;
 
-import arc.util.Log;
+import darkRegion.kt.content.Blocks;
 import mindustry.mod.Mod;
 
 
 
 public class DarkRegion extends Mod {
     public DarkRegion() {
-        
+        //Log.level = Log.LogLevel.debug;
     }
 
     @Override
@@ -18,7 +18,7 @@ public class DarkRegion extends Mod {
         DRBlocks.load();
         DRUnits.load();
         DRItems.load();
-        JsonLoad.load();
         DRPlanet.load();
+        Blocks.load();
     }
 }

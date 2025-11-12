@@ -1,8 +1,4 @@
-/// 原始代码来源未知，由 caliniya 获取
-/// 注意：需补充原始代码的许可证信息
-/// 当前版本经过重构和注释添加（AI 注释太好用了）
-
-package darkRegion.type
+package darkRegion.kt.type
 
 import arc.scene.ui.layout.Table
 import mindustry.content.Fx
@@ -35,7 +31,7 @@ import mindustry.world.meta.Stats
  * @property powerProduction 电力生产量，大于 0 表示该配方发电
  * @property consPower 电力消耗配置，单独存储以便特殊处理
  */
-class Formula {
+class Recipe {
     var inputs: Array<Consume>? = null
     var outputItems: Array<ItemStack>? = null
     var outputLiquids: Array<LiquidStack>? = null
@@ -53,9 +49,9 @@ class Formula {
      * 设置输入消耗配置
      *
      * @param inputs 可变参数的消耗对象
-     * @return 当前 Formula 实例，支持链式调用
+     * @return 当前 Recipe 实例，支持链式调用
      */
-    fun setInputs(vararg inputs: Consume): Formula {
+    fun setInputs(vararg inputs: Consume): Recipe {
         this.inputs = arrayOf(*inputs)
         return this
     }
@@ -64,9 +60,9 @@ class Formula {
      * 设置输出物品配置
      *
      * @param items 可变参数的物品堆栈
-     * @return 当前 Formula 实例，支持链式调用
+     * @return 当前 Recipe 实例，支持链式调用
      */
-    fun setOutputItems(vararg items: ItemStack): Formula {
+    fun setOutputItems(vararg items: ItemStack): Recipe {
         outputItems = arrayOf(*items)
         return this
     }
@@ -75,9 +71,9 @@ class Formula {
      * 设置输出液体配置
      *
      * @param liquids 可变参数的液体堆栈
-     * @return 当前 Formula 实例，支持链式调用
+     * @return 当前 Recipe 实例，支持链式调用
      */
-    fun setOutputLiquids(vararg liquids: LiquidStack): Formula {
+    fun setOutputLiquids(vararg liquids: LiquidStack): Recipe {
         outputLiquids = arrayOf(*liquids)
         return this
     }
@@ -88,9 +84,9 @@ class Formula {
      * @param `in` 输入消耗数组
      * @param items 输出物品数组
      * @param liquids 输出液体数组
-     * @return 当前 Formula 实例，支持链式调用
+     * @return 当前 Recipe 实例，支持链式调用
      */
-    fun set(`in`: Array<Consume>, items: Array<ItemStack>, liquids: Array<LiquidStack>): Formula {
+    fun set(`in`: Array<Consume>, items: Array<ItemStack>, liquids: Array<LiquidStack>): Recipe {
         inputs = `in`
         outputItems = items
         outputLiquids = liquids
@@ -101,9 +97,9 @@ class Formula {
      * 设置电力生产量
      *
      * @param value 电力生产值，大于 0 表示该配方会发电
-     * @return 当前 Formula 实例，支持链式调用
+     * @return 当前 Recipe 实例，支持链式调用
      */
-    fun setPowerProduction(value: Float): Formula {
+    fun setPowerProduction(value: Float): Recipe {
         powerProduction = value
         return this
     }
@@ -139,11 +135,7 @@ class Formula {
      * @param build 目标建筑实例
      */
     fun update(build: Building) {
-        inputs?.let {
-            for (c in it) {
-                c.update(build)
-            }
-        }
+        inputs?.forEach { it.update(build) }
     }
 
     /**
@@ -154,11 +146,7 @@ class Formula {
      * @param build 目标建筑实例
      */
     fun trigger(build: Building) {
-        inputs?.let {
-            for (c in it) {
-                c.trigger(build)
-            }
-        }
+        inputs?.forEach { it.trigger(build) }
     }
 
     /**
@@ -209,6 +197,6 @@ class Formula {
      * @return 包含配方完整信息的字符串
      */
     override fun toString(): String {
-        return "Formula{ input=${inputs.contentToString()}, outputItems=${outputItems.contentToString()}, outputLiquids=${outputLiquids.contentToString()}, craftTime=$craftTime, powerProduction=$powerProduction }"
+        return "Recipe { inputs=${inputs.contentToString()}, outputItems=${outputItems.contentToString()}, outputLiquids=${outputLiquids.contentToString()}, craftTime=$craftTime, powerProduction=$powerProduction }"
     }
 }

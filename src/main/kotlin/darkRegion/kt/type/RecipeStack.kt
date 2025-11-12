@@ -1,28 +1,36 @@
-/// 原始代码来源未知，由 caliniya 获取
-/// 注意：需补充原始代码的许可证信息
-/// 当前版本经过重构和注释添加（AI 注释太好用了）
-
-package darkRegion.type
+package darkRegion.kt.type
 
 import arc.struct.Seq
 import mindustry.gen.Building
 import mindustry.world.Block
-
 
 /**
  * 配方堆栈类 - 用于管理和操作多个配方
  *
  * @see Seq
  */
-class FormulaStack : Seq<Formula>() {
+class RecipeStack : Seq<Recipe>() {
+    /**
+     * 使用 Lambda 表达式添加配方
+     *
+     * @param function 配置配方的 Lambda 表达式
+     * @return 当前 RecipeStack 实例，支持链式调用
+     */
+    fun add(function: Recipe.() -> Unit): RecipeStack {
+        val recipe = Recipe()
+        function(recipe)
+        add(recipe)
+        return this
+    }
+
     /**
      * 批量添加配方到堆栈
      *
-     * @param formulas 可变参数的配方实例
-     * @return 当前 FormulaStack 实例，支持链式调用
+     * @param recipes 可变参数的配方实例
+     * @return 当前 RecipeStack 实例，支持链式调用
      */
-    fun addFormula(vararg formulas: Formula): FormulaStack {
-        formulas.forEach(this::add)
+    fun addRecipe(vararg recipes: Recipe): RecipeStack {
+        recipes.forEach(this::add)
         return this
     }
 

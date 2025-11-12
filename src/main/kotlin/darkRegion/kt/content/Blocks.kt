@@ -2,9 +2,12 @@
 
 package darkRegion.kt.content
 
+import arc.struct.Seq
 import arc.util.Log
+import darkRegion.kt.world.production.MultipleRecipeCrafter
 import mindustry.type.Category
 import mindustry.type.ItemStack
+import mindustry.type.LiquidStack
 import mindustry.world.Block
 import mindustry.world.blocks.production.Drill
 import mindustry.world.meta.Env
@@ -18,18 +21,22 @@ class Blocks {
         @JvmStatic
         fun load() {
             Log.debug("注册方块 mechanical-drill-small")
-            mechanicalDrillSmall = Drill("mechanical-drill-small").apply {
+            mechanicalDrillSmall = MultipleRecipeCrafter("mechanical-drill-small").apply {
                 requirements(
                     Category.production,
                     ItemStack.with(MindustryItems.copper, 12)
                 )
-                tier = 2
-                drillTime = 600f
-                size = 1
+                size = 2
                 //mechanical drill doesn't work in space
                 envEnabled = envEnabled xor Env.space
 
-                consumeLiquid(MindustryLiquids.water, 0.05f).boost()
+                recipes = RecipeStack().add {
+                    outputItems = ItemStack.with(MindustryItems.copper, 1)
+                    outputLiquids = LiquidStack.with(MindustryLiquids.water, 1)
+                }.add {
+                    outputItems = ItemStack.with(MindustryItems.sand, 1)
+                    outputLiquids = LiquidStack.with(MindustryLiquids.oil, 1)
+                }
             }
         }
     }
