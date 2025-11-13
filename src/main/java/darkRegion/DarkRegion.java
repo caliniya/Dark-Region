@@ -13,6 +13,7 @@ public class DarkRegion extends Mod {
 
     @Override
     public void loadContent() {
+        DRLoadouts.load();
         JsonLoad.load();
         DRBlocks.load();
         DRUnits.load();

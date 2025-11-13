@@ -1,0 +1,20 @@
+{
+  "allFiles": [
+    {
+      "file": "/storage/emulated/0/AndroidIDEProjects/Dark-Region/src/main/kotlin/darkRegion/kt/world/production/MultipleCrafter.kt",
+      "selection": {
+        "end": {
+          "column": 4,
+          "index": 1179,
+          "line": 43
+        },
+        "start": {
+          "column": 4,
+          "index": 1179,
+          "line": 43
+        }
+      }
+    }
+  ],
+  "selectedFile": "/storage/emulated/0/AndroidIDEProjects/Dark-Region/src/main/kotlin/darkRegion/kt/world/production/MultipleCrafter.kt"
+}
