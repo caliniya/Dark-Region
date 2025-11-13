@@ -17,7 +17,7 @@ public class DRPlanet {
     ;
     
     public static void load() {
-        加利尼亚 = new Planet("加利尼亚l" ,Planets.sun ,1f ,5){{
+        加利尼亚 = new Planet("加利尼亚" ,Planets.sun ,1f ,5){{
             generator = new GaliniaGenerator();
             
             

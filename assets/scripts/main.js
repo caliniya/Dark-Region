@@ -6,7 +6,7 @@
 //require("废弃/区块2")
 //require ("废弃科技树")
 //弃用
-require("星球/加利尼亚");
+//require("星球/加利尼亚");
 require("星球/核心")
 require("重引/液体")//液体
 require("特效/液体池效果")//动态效果
