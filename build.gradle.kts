@@ -27,7 +27,7 @@ repositories {
     maven { url = uri("https://www.jitpack.io") }
 }
 
-val mindustryVersion = "v146"
+val mindustryVersion = "v153"
 
 // 这个是项目的依赖
 dependencies {

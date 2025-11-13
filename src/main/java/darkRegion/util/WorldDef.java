@@ -9,7 +9,7 @@ import static mindustry.Vars.world;
 
 public class WorldDef {
     public static boolean toBlock(Building block, Building other) {
-        return !other.block().rotate || other.relativeTo(block) == other.rotation;
+        return !other.block.rotate || other.relativeTo(block) == other.rotation;
     }
 
     public static Seq<Tile> getAreaTile(Vec2 pos, int width, int height) {

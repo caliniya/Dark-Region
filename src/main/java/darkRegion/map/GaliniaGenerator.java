@@ -1,4 +1,5 @@
 package darkRegion.map;
+
 import static mindustry.Vars.*;
 
 import arc.*;
@@ -17,8 +18,6 @@ import mindustry.maps.generators.*;
 import mindustry.type.*;
 import mindustry.world.*;
 import mindustry.world.blocks.environment.*;
-
-import static mindustry.Vars.*;
 
 public class GaliniaGenerator extends PlanetGenerator{
     Color c1 = Color.valueOf("5057a6"), c2 = Color.valueOf("272766");
@@ -56,12 +55,15 @@ public class GaliniaGenerator extends PlanetGenerator{
     public float getHeight(Vec3 position){
         return position.z;
     }
-
+    
     @Override
-    public Color getColor(Vec3 position){
-        float depth = Simplex.noise3d(seed, 2, 0.56, 1.7f, position.x, position.y, position.z) / 2f;
-        return (c1).lerp(c2, Mathf.clamp(Mathf.round(depth, 0.15f))).a(1f - 0.2f);
+    public void getColor(Vec3 position, Color out){
+        Block block = getBlock(position);
+        //replace salt with sand color
+        if(block == Blocks.salt) block = Blocks.sand;
+        out.set(block.mapColor).a(1f - block.albedo);
     }
+    
 
     @Override
     public float getSizeScl(){
@@ -156,7 +158,9 @@ public class GaliniaGenerator extends PlanetGenerator{
             void join(int x1, int y1, int x2, int y2){
                 float nscl = rand.random(100f, 140f) * 6f;
                 int stroke = rand.random(3, 9);
+                //pathfind()
                 brush(pathfind(x1, y1, x2, y2, tile -> (tile.solid() ? 50f : 0f) + noise(tile.x, tile.y, 2, 0.4f, 1f / nscl) * 500 , Astar.manhattan), stroke);
+                
                 };
             
                 
@@ -622,5 +626,10 @@ public class GaliniaGenerator extends PlanetGenerator{
     float rawHeight(Vec3 position){
         return Simplex.noise3d(seed, 8, 0.7f, 1f, position.x, position.y, position.z);
     }
+
+    @Override
+    public int getSectorSize(Sector sector) {
+        return 350;
+    }
+    
 }
-;
