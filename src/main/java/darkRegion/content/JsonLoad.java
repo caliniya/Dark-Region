@@ -6,6 +6,7 @@ import mindustry.world.Block;
 import mindustry.world.blocks.environment.Floor;
 
 //此文件负责将所有json内容引入java
+//除非确信某一个内容用不上，否则保留
 
 public class JsonLoad {
     

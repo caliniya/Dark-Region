@@ -64,7 +64,7 @@ public class DRStatusEffect extends StatusEffect {
         // 在状态显示中添加免疫信息
         if(immunities.size > 0){
             for(var immuneEffect : immunities.toSeq().sort()){
-                stats.add(DRStat.免疫, immuneEffect.emoji() + immuneEffect);
+                stats.add(Stat.immunities, immuneEffect.emoji() + immuneEffect);
             }
         }
     }

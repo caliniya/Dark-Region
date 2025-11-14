@@ -1,19 +1,14 @@
 package darkRegion.content;
 
-import darkRegion.entities.ability.shield_suppression;
+import arc.graphics.Color;
+import darkRegion.entities.ability.*;
+import darkRegion.type.ai.FreightAI;
+import mindustry.content.Fx;
 import mindustry.type.UnitType;
-import arc.graphics.*;
-import arc.graphics.g2d.*;
-import arc.math.*;
-import arc.math.geom.*;
-import arc.struct.*;
-import arc.util.*;
-import mindustry.ai.*;
 import mindustry.ai.types.*;
 import mindustry.entities.*;
 import mindustry.entities.abilities.*;
 import mindustry.entities.bullet.*;
-import mindustry.entities.effect.*;
 import mindustry.entities.part.*;
 import mindustry.entities.pattern.*;
 import mindustry.gen.*;
@@ -33,19 +28,21 @@ import static mindustry.Vars.*;
 public class DRUnits {
     
     public static UnitType a1;
-    
     public static void load(){
         a1 = new UnitType("aa"){{
             constructor = UnitEntity::create;    
-            canBoost = true;
+            flying = true;
             boostMultiplier = 1.5f;
             speed = 0.55f;
             hitSize = 8f;
             health = 120f;
             buildSpeed = 0.8f;
             armor = 1f;
-            abilities.add(new shield_suppression());
+            
+            abilities.add(new ShieldSuppression());
             ammoType = new PowerAmmoType(1000);
+            
+            aiController = FreightAI::new;
 
             weapons.add(new Weapon("heal-weapon"){{
                 top = false;
@@ -53,10 +50,9 @@ public class DRUnits {
                 reload = 24f;
                 x = 4.5f;
                 alternate = false;
-                //ejectEffect = Fx.none;
+                ejectEffect = Fx.none;
                 recoil = 2f;
                 shootSound = Sounds.lasershoot;
-
                 bullet = new LaserBoltBulletType(5.2f, 13){{
                     lifetime = 30f;
                     healPercent = 5f;

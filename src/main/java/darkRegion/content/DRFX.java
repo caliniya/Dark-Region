@@ -26,6 +26,5 @@ public class DRFX {
     
     none = new Effect(0, 0f, e -> {})
     
-    
     ;
 }

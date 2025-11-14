@@ -12,7 +12,7 @@ import mindustry.graphics.*;
 import mindustry.entities.*;
 
 
-public class shield_suppression extends Ability {
+public class ShieldSuppression extends Ability {
 	public float reload = 60f;//冷却时间
     public float radius = 120f;//效果半径
     public float suppressionTime = 60f;//抑制时间
