@@ -56,7 +56,7 @@ public class DRPlanet {
             bloom = false;//禁用光晕
             generator = new SpaceStationGenerator();
             mesh = new HexMesh(this, 0);
-            sectors.add(new Sector(this, PlanetGrid.Ptile.empty));
+            //sectors.add(new Sector(this, PlanetGrid.Ptile.empty));
             hasAtmosphere = false;
             updateLighting = true;
             drawOrbit = true;

@@ -2,11 +2,11 @@ package darkRegion;
 
 import darkRegion.content.*;
 import darkRegion.kt.content.Blocks;
+import darkRegion.kt.world.production.MultipleRecipeCrafter;
 import mindustry.mod.Mod;
 
-
-
 public class DarkRegion extends Mod {
+    
     public DarkRegion() {
         //Log.level = Log.LogLevel.debug;
     }
@@ -19,6 +19,6 @@ public class DarkRegion extends Mod {
         DRUnits.load();
         DRItems.load();
         DRPlanet.load();
-        Blocks.load();
+        DRStatusEffects.load();
     }
 }
