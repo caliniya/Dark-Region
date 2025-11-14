@@ -1,5 +1,6 @@
 package darkRegion.content;
 
+import arc.func.Func;
 import arc.graphics.Color;
 import darkRegion.entities.ability.*;
 import darkRegion.type.ai.FreightAI;
@@ -42,7 +43,8 @@ public class DRUnits {
             abilities.add(new ShieldSuppression());
             ammoType = new PowerAmmoType(1000);
             
-            aiController = FreightAI::new;
+            controller = u -> new FreightAI();
+            playerControllable = false;
 
             weapons.add(new Weapon("heal-weapon"){{
                 top = false;

@@ -12,13 +12,12 @@ import mindustry.world.Tile;
 public class FreightAI <T extends Block> extends AIController{
     
     public Seq<FactoryInfo<T>> factories = new Seq<>();
-    public int targetTimer = 600; // 工厂寻找计时器
+    public int targetTimer = 300; // 工厂寻找冷却
     
-    // 新增字段
     private FactoryPair<T> currentTargetPair; // 当前选中的工厂对
     private boolean isBusy = false; // 是否忙碌状态
-    private int busyTimer = 600; // 忙碌状态计时器（10秒 = 600帧）
-    private int scanDelayTimer = 60; // 扫描后延迟计时器（1秒 = 60帧）
+    private int busyTimer = 600; // 忙碌状态计时器
+    private int scanDelayTimer = 300; // 扫描后延迟计时器
     private boolean hasScanned = false; // 是否已完成扫描
     
     // 工厂对类，存储匹配的输入输出工厂
@@ -48,13 +47,19 @@ public class FreightAI <T extends Block> extends AIController{
     }
     
     @Override
+    public void updateUnit() {
+        super.updateUnit();
+    }
+    
+    
+    @Override
     public void updateTargeting() {
         // 定期扫描工厂
-        //if(timer.get(targetTimer, 600)) {
+        if(timer.get(timerTarget,targetTimer)) {
             scanFriendlyFactories();
             hasScanned = true;
             scanDelayTimer = 0; // 重置延迟计时器
-        //}
+        }
         
         // 更新忙碌状态计时器
         if(isBusy) {
@@ -74,23 +79,16 @@ public class FreightAI <T extends Block> extends AIController{
         if(hasScanned && scanDelayTimer >= 60 && !isBusy && factories.size >= 2) {
             selectRandomFactoryPair();
         }
-        
-        // 如果有当前目标，控制单位移动
-       // if(currentTargetPair != null && isBusy) {
-        Log.info("货运AI移动");
-            controlUnitMovement();
-       // }
     }
     
     /**
      * 扫描友方工厂并存储信息
      */
     protected void scanFriendlyFactories() {
-        Log.info("货运AI扫描");
-        //factories.clear();
+        factories.clear();
         // 扫描所有友方建筑
         for(Building building : unit.team.data().buildings){
-            if(building.block.category == Category.crafting && building.block.hasItems && building.items.any()) {
+            if(building.block.category == Category.crafting && building.block.hasItems) {
                 T factoryBlock = (T)building.block;
                 Tile position = building.tile;
                 //获取工厂需要的物品和输出的物品
@@ -147,7 +145,7 @@ public class FreightAI <T extends Block> extends AIController{
             hasScanned = false; // 重置扫描标志
             
             // 输出调试信息（可选）
-            Log.info("工厂对: " + 
+            Log.debug("工厂对: " + 
                 currentTargetPair.outputFactory.factoryBlock + " -> " + 
                 currentTargetPair.inputFactory.factoryBlock);
         }
@@ -167,15 +165,14 @@ public class FreightAI <T extends Block> extends AIController{
         return false;
     }
     
-    /**
-     * 控制单位移动至目标工厂
-     */
-    protected void controlUnitMovement() {
-        if(currentTargetPair != null && currentTargetPair.outputFactory != null) {
+    @Override
+    public void updateMovement() {
+        if(currentTargetPair != null && currentTargetPair.outputFactory != null && isBusy) {
             // 直线飞往输出工厂
             moveTo(currentTargetPair.outputFactory.position,5);
         }
     }
+    
     
     /**
      * 获取扫描到的工厂列表
