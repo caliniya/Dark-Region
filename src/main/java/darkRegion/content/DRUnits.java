@@ -1,6 +1,5 @@
 package darkRegion.content;
 
-import arc.func.Func;
 import arc.graphics.Color;
 import darkRegion.entities.ability.*;
 import darkRegion.type.ai.FreightAI;
@@ -28,17 +27,19 @@ import static mindustry.Vars.*;
 
 public class DRUnits {
     
-    public static UnitType a1;
+    public static UnitType 
+    小型工厂货运无人机, aa
+    ;
     public static void load(){
-        a1 = new UnitType("aa"){{
+        小型工厂货运无人机 = new UnitType("小型工厂货运无人机"){{
             constructor = UnitEntity::create;    
             flying = true;
-            boostMultiplier = 1.5f;
-            speed = 0.55f;
+            boostMultiplier = 5f;
+            speed = 5f;
             hitSize = 8f;
-            health = 120f;
-            buildSpeed = 0.8f;
-            armor = 1f;
+            health = 2000f;
+            buildSpeed = 2f;
+            armor = 5f;
             
             abilities.add(new ShieldSuppression());
             ammoType = new PowerAmmoType(1000);
@@ -63,7 +64,38 @@ public class DRUnits {
                     frontColor = Color.white;
                 }};
             }});
+            
+        }};
+        aa = new UnitType("aa"){{
+            constructor = UnitEntity::create;    
+            flying = true;
+            boostMultiplier = 5f;
+            speed = 5f;
+            hitSize = 8f;
+            health = 2000f;
+            buildSpeed = 2f;
+            armor = 5f;
+            
+            abilities.add(new StatusFieldAbility(DRStatusEffects.压制 , 10 , 5 ,200));
+            ammoType = new PowerAmmoType(1000);
+
+            weapons.add(new Weapon("heal-weapon"){{
+                top = false;
+                shootY = 2f;
+                reload = 24f;
+                x = 4.5f;
+                alternate = false;
+                ejectEffect = Fx.none;
+                recoil = 2f;
+                shootSound = Sounds.lasershoot;
+                bullet = new LaserBoltBulletType(5.2f, 13){{
+                    lifetime = 30f;
+                    healPercent = 5f;
+                    collidesTeam = true;
+                    backColor = Pal.heal;
+                    frontColor = Color.white;
+                }};
+            }});
         }};
     }
-	
 }

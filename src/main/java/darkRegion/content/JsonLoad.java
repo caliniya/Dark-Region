@@ -22,10 +22,12 @@ public class JsonLoad {
     public static Liquid 
     低温液
     ;
-    
+    /*
     public static Planet
     加利尼亚
     ;
+    */
+    //已转为java，故不需要再引用防止同名错误
     
     public static void load(){
         高温核心 = Vars.content.block("深暗之地-高温核心");
@@ -38,7 +40,7 @@ public class JsonLoad {
         
         低温液 = Vars.content.liquid("深暗之地-低温液");
         
-        加利尼亚 = Vars.content.planet("深暗之地-加利尼亚");
+        //加利尼亚 = Vars.content.planet("深暗之地-加利尼亚");
         
     }
 }

@@ -8,16 +8,17 @@ import mindustry.type.Category;
 import mindustry.type.Item;
 import mindustry.world.Block;
 import mindustry.world.Tile;
+import mindustry.world.blocks.production.GenericCrafter;
 
-public class FreightAI <T extends Block> extends AIController{
+public class FreightAI <T extends GenericCrafter> extends AIController{
     
     public Seq<FactoryInfo<T>> factories = new Seq<>();
     public int targetTimer = 300; // 工厂寻找冷却
     
     private FactoryPair<T> currentTargetPair; // 当前选中的工厂对
     private boolean isBusy = false; // 是否忙碌状态
-    private int busyTimer = 600; // 忙碌状态计时器
-    private int scanDelayTimer = 300; // 扫描后延迟计时器
+    private int busyTimer = 600; // 忙碌状态冷却
+    private int scanDelayTimer = 300; // 扫描后延迟
     private boolean hasScanned = false; // 是否已完成扫描
     
     // 工厂对类，存储匹配的输入输出工厂
@@ -91,23 +92,18 @@ public class FreightAI <T extends Block> extends AIController{
             if(building.block.category == Category.crafting && building.block.hasItems) {
                 T factoryBlock = (T)building.block;
                 Tile position = building.tile;
-                //获取工厂需要的物品和输出的物品
-                Seq<String> requiredItems = new Seq<>();
-                Seq<String> outputItems = new Seq<>();
+                Seq<Item> requiredItems = new Seq<>();
+                Seq<Item> outputItems = new Seq<>();
+                Seq<Item> items = new Seq<>();
                 
                 building.items.each((item, amount) -> {
                     if(amount > 0) {
-                        // 如果该物品是工厂的消耗品，则视为需求物品
-                        if(building.block.consumesItem(item)) {
-                            requiredItems.add(item.name);
-                        } else {
-                            // 否则视为输出物品
-                            outputItems.add(item.name);
-                        }
+                        items.add(item);
                     }
+                    
                 });
                 
-                factories.add(new FactoryInfo<>(position, factoryBlock, requiredItems, outputItems));
+                //factories.add(new FactoryInfo<>(position, factoryBlock, requiredItems, outputItems));
             }
         }
     }

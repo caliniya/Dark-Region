@@ -13,12 +13,12 @@ public class DarkRegion extends Mod {
 
     @Override
     public void loadContent() {
+        JsonLoad.load();//此内容第一个加载以防止同名错误
+        DRStatusEffects.load();
         DRLoadouts.load();
-        JsonLoad.load();
+        DRPlanet.load();
         DRBlocks.load();
         DRUnits.load();
         DRItems.load();
-        DRPlanet.load();
-        DRStatusEffects.load();
     }
 }
