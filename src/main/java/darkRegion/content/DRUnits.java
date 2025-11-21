@@ -28,7 +28,7 @@ import static mindustry.Vars.*;
 public class DRUnits {
     
     public static UnitType 
-    小型工厂货运无人机, aa
+    小型工厂货运无人机, aa , 临战
     ;
     public static void load(){
         小型工厂货运无人机 = new UnitType("小型工厂货运无人机"){{
@@ -89,6 +89,36 @@ public class DRUnits {
                 recoil = 2f;
                 shootSound = Sounds.lasershoot;
                 bullet = new LaserBoltBulletType(5.2f, 13){{
+                    lifetime = 30f;
+                    healPercent = 5f;
+                    collidesTeam = true;
+                    backColor = Pal.heal;
+                    frontColor = Color.white;
+                }};
+            }});
+        }};
+        临战 = new UnitType("临战"){{
+            constructor = UnitEntity::create;    
+            flying = true;
+            boostMultiplier = 5f;
+            speed = 5f;
+            hitSize = 8f;
+            health = 2000f;
+            buildSpeed = 2f;
+            armor = 5f;
+            
+            ammoType = new PowerAmmoType(1000);
+
+            weapons.add(new Weapon("111"){{
+                top = false;
+                shootY = 2f;
+                reload = 24f;
+                x = 4.5f;
+                alternate = false;
+                ejectEffect = Fx.none;
+                recoil = 2f;
+                shootSound = Sounds.lasershoot;
+                bullet = new LaserBoltBulletType(20f, 13){{
                     lifetime = 30f;
                     healPercent = 5f;
                     collidesTeam = true;

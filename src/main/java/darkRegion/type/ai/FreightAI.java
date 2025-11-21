@@ -6,6 +6,7 @@ import mindustry.entities.units.AIController;
 import mindustry.gen.Building;
 import mindustry.type.Category;
 import mindustry.type.Item;
+import mindustry.type.ItemStack;
 import mindustry.world.Block;
 import mindustry.world.Tile;
 import mindustry.world.blocks.production.GenericCrafter;
@@ -89,19 +90,27 @@ public class FreightAI <T extends GenericCrafter> extends AIController{
         factories.clear();
         // 扫描所有友方建筑
         for(Building building : unit.team.data().buildings){
-            if(building.block.category == Category.crafting && building.block.hasItems) {
+            if(building.block instanceof GenericCrafter && building.block.hasItems) {
                 T factoryBlock = (T)building.block;
                 Tile position = building.tile;
-                Seq<Item> requiredItems = new Seq<>();
-                Seq<Item> outputItems = new Seq<>();
-                Seq<Item> items = new Seq<>();
+                ItemStack[] require = new ItemStack[50];
+                ItemStack[] output = new ItemStack[50];
+                GenericCrafter a = (T)building.block;
+                output = a.outputItems;
                 
+                
+                /*
                 building.items.each((item, amount) -> {
                     if(amount > 0) {
-                        items.add(item);
+                      if(building.block.consumesItem(item)) {
+                        requiredItems.add(item)
+                      	
+                      }else{outputItems.add(item);
+                          }
                     }
                     
                 });
+                */
                 
                 //factories.add(new FactoryInfo<>(position, factoryBlock, requiredItems, outputItems));
             }
@@ -140,7 +149,7 @@ public class FreightAI <T extends GenericCrafter> extends AIController{
             busyTimer = 600; // 设置10秒忙碌状态
             hasScanned = false; // 重置扫描标志
             
-            // 输出调试信息（可选）
+            // 输出调试信息
             Log.debug("工厂对: " + 
                 currentTargetPair.outputFactory.factoryBlock + " -> " + 
                 currentTargetPair.inputFactory.factoryBlock);
