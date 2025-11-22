@@ -1,7 +1,9 @@
 package darkRegion.content;
 
 import mindustry.Vars;
+import mindustry.ctype.ContentType;
 import mindustry.type.*;
+import mindustry.type.Sector;
 import mindustry.world.Block;
 import mindustry.world.blocks.environment.Floor;
 
@@ -22,6 +24,11 @@ public class JsonLoad {
     public static Liquid 
     低温液
     ;
+    
+    public static Sector
+    加利尼亚空间站地图
+    ;
+    
     /*
     public static Planet
     加利尼亚
@@ -41,6 +48,8 @@ public class JsonLoad {
         低温液 = Vars.content.liquid("深暗之地-低温液");
         
         //加利尼亚 = Vars.content.planet("深暗之地-加利尼亚");
+        
+        //加利尼亚空间站地图 = Vars.content.getByName(ContentType.sector , "加利尼亚空间站");
         
     }
 }

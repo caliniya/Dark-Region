@@ -97,12 +97,13 @@ public class DRUnits {
                 }};
             }});
         }};
+        
         临战 = new UnitType("临战"){{
             constructor = UnitEntity::create;    
             flying = true;
             boostMultiplier = 5f;
             speed = 5f;
-            hitSize = 8f;
+            hitSize = 30f;
             health = 2000f;
             buildSpeed = 2f;
             armor = 5f;

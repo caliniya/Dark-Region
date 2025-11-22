@@ -1,0 +1,14 @@
+{
+"name":"加利尼亚空间站"
+"description":"已部署空间站\n扫描行星并识别敌方科技\n[accent][准备进攻][]"
+"alwaysUnlocked": true,
+"sector":1
+"difficulty":1
+"captureWave":1
+"planet":"加利尼亚空间站",    
+"research":
+    {
+    "parent" :"高温核心",
+    "planet" :"加利尼亚",
+     }
+}

@@ -1,14 +1,14 @@
 {
 "name":"行星着陆端口"
 "description":"此区块敌人威胁程度低\n占领此区块，研究科技以自动化生产\n[accent][开始进攻][]"
-"alwaysUnlocked": true,  // 科技树默认解锁
+"alwaysUnlocked": false,
 "sector":11
 "difficulty":1
 "captureWave":1
 "planet":"加利尼亚",    
 "research":
     {
-    "parent" :"高温核心",
+    "parent" :"加利尼亚空间站",
     "planet" :"加利尼亚",
      }
 }
