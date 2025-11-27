@@ -8,7 +8,7 @@ import mindustry.world.meta.Stat;
 import mindustry.world.meta.Stats;
 
 public class DRStatusEffect extends StatusEffect {
-    /** Effects that are immune when this effect is active. */
+    
     public ObjectSet<StatusEffect> immunities = new ObjectSet<>();
     
     public DRStatusEffect(String name){
@@ -16,10 +16,8 @@ public class DRStatusEffect extends StatusEffect {
     }
 
     /**
-     * Makes this effect provide immunity to the specified effects.
-     * This creates a one-way immunity relationship.
-     * @param effects The effects to be immune to
-     使该效果提供对指定效果的免疫。*这形成了一种单向豁免关系。
+     使用此方法创建免疫
+     使该效果提供对指定效果的免疫。这形成了一种单向豁免关系。
      */
     public void immuneTo(StatusEffect... effects){
         for(StatusEffect effect : effects){
@@ -30,23 +28,6 @@ public class DRStatusEffect extends StatusEffect {
                 // 通过不修改result来阻止效果应用
             });
         }
-    }
-    
-    /**
-     * Checks if this effect provides immunity to the specified effect.
-     * @param effect The effect to check immunity for
-     * @return true if immune, false otherwise
-     */
-    public boolean isImmuneTo(StatusEffect effect){
-        return immunities.contains(effect);
-    }
-    
-    /**
-     * Gets all effects that this effect provides immunity to.
-     * @return set of immune effects
-     */
-    public ObjectSet<StatusEffect> getImmunities(){
-        return immunities;
     }
 
     /**

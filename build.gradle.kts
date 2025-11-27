@@ -28,6 +28,7 @@ repositories {
 }
 
 val mindustryVersion = "v153"
+//val uncVersion = "2.3.1"
 
 // 这个是项目的依赖
 dependencies {
@@ -36,6 +37,8 @@ dependencies {
     compileOnly("com.github.Anuken.Arc:arc-core:${mindustryVersion}")
     // https://mvnrepository.com/artifact/com.github.Anuken.Mindustry/core
     compileOnly("com.github.Anuken.Mindustry:core:${mindustryVersion}")
+    // EB-wilson的依赖
+    //compileOnly ("com.github.EB-wilson.UniverseCore:core:$uncVersion")
 }
 
 group = "caliniya"
