@@ -13,8 +13,8 @@ public class DRStatusEffects {
     public static void load(){
         压制 = new DRStatusEffect("压制"){{
             immuneTo(StatusEffects.burning,StatusEffects.freezing,StatusEffects.slow);
+            isShieldS = true;
             init(()->{
-                
             });
         }};
     }

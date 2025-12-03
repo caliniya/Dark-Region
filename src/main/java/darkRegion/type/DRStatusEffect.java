@@ -17,17 +17,12 @@ public class DRStatusEffect extends StatusEffect {
     /** 护盾抑制标志 - 为true时抑制单位的护盾 */
     public boolean isShieldS = false;
     
-    /** 能力备份序列 - 存储单位的原始能力，用于在效果移除后恢复 */
-    public Seq<Ability> abs;
-    
     /**
      * 构造函数
      * @param name 状态效果的名称
      */
     public DRStatusEffect(String name){
         super(name);
-        // 初始化能力备份序列
-        abs = new Seq<Ability>();
     }
 
     /**
@@ -59,13 +54,12 @@ public class DRStatusEffect extends StatusEffect {
      */
     @Override
     public boolean reactsWith(StatusEffect effect){
-        // 调用父类方法检查标准反应，或检查是否免疫该效果
         return super.reactsWith(effect) || immunities.contains(effect);
     }
     
     /**
      * 设置状态显示信息
-     * 重写以在游戏界面显示额外的免疫信息
+     * 以在游戏界面显示信息
      */
     @Override
     public void setStats(){
@@ -73,31 +67,27 @@ public class DRStatusEffect extends StatusEffect {
         
         // 如果有免疫效果，添加到状态显示中
         if(immunities.size > 0){
-            // 对免疫效果排序以确保显示一致性
             for(var immuneEffect : immunities.toSeq().sort()){
-                // 使用Stat.immunities统计类别显示免疫信息
+                // 使用Stat.immunities统计类别显示免疫信息(就是单位的免疫)
                 stats.add(Stat.immunities, immuneEffect.emoji() + immuneEffect);
             }
+        }
+        if(isShieldS) {
+        	stats.add(DRStat.护盾抑制 ,true);
         }
     }
     
     /**
      * 每帧更新方法
-     * 处理护盾抑制逻辑：如果启用了护盾抑制且单位有护盾，将护盾值清零
      * 
      * @param unit 受效果影响的单位
      * @param statusEntry 状态条目
+     ?
      */
     @Override
     public void update(Unit unit, StatusEntry statusEntry) {
         // 调用父类更新逻辑
         super.update(unit , statusEntry);
-        
-        // 检查是否需要抑制护盾
-        if(isShieldS == true && unit.shield > 0) {
-            // 将单位的护盾值设为0
-            unit.shield = 0;
-        }
     }
     
     /**
@@ -106,17 +96,14 @@ public class DRStatusEffect extends StatusEffect {
      * 
      * @param unit 受效果影响的单位
      * @param time 效果持续时间
-     * @param extend 是否延长现有效果（true）或应用新效果（false）
+     * @param extend 是否延长现有效果或应用新效果?
      */
     @Override
     public void applied(Unit unit, float time, boolean extend) {
         // 调用父类应用逻辑
         super.applied(unit, time, extend);
         
-        // 仅在新应用效果时处理能力移除（非延长）
-        if(!extend && unit.abilities != null && isShieldS) {
-            // 备份单位的原始能力
-            abs.addAll(unit.abilities);
+        if(extend && unit.abilities != null && isShieldS) {
             
             // 创建临时序列，移除护盾相关能力
             Seq<Ability> seq = new Seq<>(unit.abilities);
@@ -139,11 +126,10 @@ public class DRStatusEffect extends StatusEffect {
         // 调用父类移除逻辑
         super.onRemoved(unit);
         
-        // 如果有备份的能力且启用了护盾抑制
-        if(abs.any() && isShieldS) {
+        if(isShieldS) {
             // 恢复单位的原始能力数组
-            unit.abilities = abs.toArray();
-            // 注意：abs序列在下次效果应用时会被重新赋值
+            unit.abilities = unit.type.abilities.toArray(Ability.class);
         }
+        
     }
 }

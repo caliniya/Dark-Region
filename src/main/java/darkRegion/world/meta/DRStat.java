@@ -1,10 +1,9 @@
 package darkRegion.world.meta;
 
-import mindustry.world.meta.Stat;
+import mindustry.world.meta.*;
 
-public class DRStat {
-	
+public class DRStat <T extends StatCat> {
     public static final Stat
-    免疫 = new Stat("免疫");
+    护盾抑制 = new Stat("护盾抑制" ,DRStatCat.info);
 
 }

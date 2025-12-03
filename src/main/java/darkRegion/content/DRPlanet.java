@@ -68,7 +68,7 @@ public class DRPlanet {
             orbitRadius = parent.radius + 0.5f;
             orbitTime = 6;
             alwaysUnlocked = true;
-            defaultEnv = Env.space | DREnv.omurlo | DREnv.twin;
+            defaultEnv = Env.space;
             allowWaves = false;
             defaultCore = JsonLoad.高温核心;
         }};

@@ -1,15 +1,18 @@
 package darkRegion.entities.ability;
 
+import arc.scene.ui.layout.Table;
 import arc.struct.ObjectMap;
 import arc.math.*;
 import arc.graphics.g2d.*;
 import arc.graphics.*;
 import arc.util.*;
+import darkRegion.world.meta.DRStat;
 import mindustry.entities.abilities.Ability;
 import mindustry.entities.abilities.ForceFieldAbility;
 import mindustry.gen.*;
 import mindustry.graphics.*;
 import mindustry.entities.*;
+import mindustry.world.meta.Stat;
 
 
 public class ShieldSuppression extends Ability {
@@ -43,7 +46,7 @@ public class ShieldSuppression extends Ability {
                 suppressionEndTimes.remove(other);
             }
         });
- }
+    }
     
     public void suppression(Unit unit){//接收单位然后抑制
         if(unit != null && unit.abilities != null && unit.type != null) {
@@ -52,5 +55,12 @@ public class ShieldSuppression extends Ability {
             }
         }
     }
-
+    
+    @Override
+    public void addStats(Table t) {
+        super.addStats(t);
+        t.add(abilityStat("护盾抑制"));
+    }
+    
+    
 }

@@ -20,7 +20,7 @@ public class DREvent {
         public final Sector sector, from;
         public final Schematic loadout;
         
-        public STAlaunchEvent(){Sector sector, Sector from, Schematic loadout){
+        public STAlaunchEvent(Sector sector, Sector from, Schematic loadout){
             this.sector = sector;
             this.from = from;
             this.loadout = loadout;
