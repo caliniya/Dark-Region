@@ -13,4 +13,4 @@
 - Windows
   - `./gradlew.bat deploy`
 
-产物会输出在 `<项目根目录>/build/libs` 目录中
+产物会输出在 `<项目根目录>/
