@@ -22,6 +22,7 @@ import static arc.math.Angles.*;
 import static mindustry.Vars.*;
 
 public class DRFX {
+    public static Rand rand = new Rand();
     //@SuppressWarnings("")
 	public static final Effect
     
@@ -30,6 +31,22 @@ public class DRFX {
     aaa = new Effect(10 , 10 ,date -> {
         
     }),
+    
+    
+    blockFly = new Effect(120f, 500f, e -> {
+        if (!(e.data instanceof Block block)) return;
+        rand.setSeed(e.id);
+        float angle = e.rotation + rand.range(10);
+        rand.setSeed(e.id * 2L);
+        float rotate = rand.range(20);
+        rand.setSeed(e.id * 3L);
+        float len = rand.random(225f, 250f);
+        Draw.reset();
+        Draw.alpha(e.fout(0.5f));
+        Draw.rect(block.fullIcon, e.x + Angles.trnsx(angle, len) * e.fin(Interp.pow10Out), e.y + Angles.trnsy(angle, len) * e.fin(Interp.pow10Out), e.fin() * rotate);
+        //Draw.rect(block.fullIcon, e.x, e.y);
+        //Fill.rect(e.x, e.y, 100, 100);
+    }).layer(Layer.blockOver),
     
     unitJumpTrail = new Effect(20f, 40f, e -> {
         float fin = e.fin();
